@@ -52,7 +52,7 @@ void BacaMATRIKS (MATRIKS * M, int NB, int NK, char filename[30]){
     for(size_t i = 1; i <= NB + 1; ++i)
     {
         for(size_t j = 1; j <= NK + 1 ; ++j){
-            fscanf(pf, "%c", &M[i-1][j-1]);
+            fscanf(pf, "%c", &Elmt(*M, i-1, j-1));
         }
     }
     fclose (pf); 
