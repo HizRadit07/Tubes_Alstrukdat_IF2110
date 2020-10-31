@@ -1,0 +1,113 @@
+/* ********** Definisi TYPE MATRIKS dengan indeks dan elemen integer ********** */
+
+#include "boolean.h"
+#include "matriks.h"
+#include <stdio.h>
+
+/* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
+/* *** Konstruktor membentuk MATRIKS *** */
+void MakeMATRIKS (int NB, int NK, MATRIKS * M){
+    NBrsEff(*M) = NB;
+    NKolEff(*M) = NK;
+} 
+/* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */
+/* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
+/* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
+
+/* *** Selektor "DUNIA MATRIKS" *** */
+boolean IsIdxValid (int i, int j){
+    return ((i >= BrsMin && i <= BrsMax) && (j >= KolMin && j <= KolMax));
+}
+/* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
+
+/* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
+indeks GetFirstIdxBrs (MATRIKS M){
+    return 0;
+}
+/* Mengirimkan indeks baris terkecil M */
+indeks GetFirstIdxKol (MATRIKS M){
+    return 0;
+}
+/* Mengirimkan indeks kolom terkecil M */
+indeks GetLastIdxBrs (MATRIKS M){
+    return NBrsEff(M)-1;
+}
+/* Mengirimkan indeks baris terbesar M */
+indeks GetLastIdxKol (MATRIKS M){
+    return NKolEff(M)-1;
+}
+/* Mengirimkan indeks kolom terbesar M */
+boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
+    return ((i >= GetFirstIdxBrs(M) && i <= GetLastIdxBrs(M)) && (j >= GetFirstIdxKol(M) && j <= GetLastIdxKol(M)));
+}
+
+
+/* ********** KELOMPOK BACA/TULIS ********** */ 
+void BacaMATRIKS (MATRIKS * M, int NB, int NK, char filename[30]){
+    FILE *pf;
+    pf = fopen ("map2.txt", "r");
+    if (pf == NULL)
+        printf("maap gan");
+
+    for(size_t i = 1; i <= NB + 1; ++i)
+    {
+        for(size_t j = 1; j <= NK + 1 ; ++j){
+            fscanf(pf, "%c", &M[i-1][j-1]);
+        }
+    }
+    fclose (pf); 
+}
+/* I.S. IsIdxValid(NB,NK) */ 
+/* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
+/* Proses: Melakukan MakeMATRIKS(M,NB,NK) dan mengisi nilai efektifnya */
+/* Selanjutnya membaca nilai elemen per baris dan kolom */
+/* Contoh: Jika NB = 3 dan NK = 3, maka contoh cara membaca isi matriks :
+1 2 3
+4 5 6
+8 9 10 
+*/
+void TulisMATRIKS (MATRIKS M){
+    for(indeks k = 0; k < NBrsEff(M); k++)
+    {
+        for(indeks l = 0; l < NKolEff(M); l++)
+        {
+            printf("%c",Elmt(M, k, l));
+        }
+        printf("\n");
+    }
+}
+/* I.S. M terdefinisi */
+/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris 
+   dipisahkan sebuah spasi */
+/* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
+/* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
+1 2 3
+4 5 6
+8 9 10
+*/
+
+/* ********** Operasi lain ********** */
+int NBElmt (MATRIKS M){
+    return NBrsEff(M) * NKolEff(M);
+}
+/* Mengirimkan banyaknya elemen M */
+
+boolean JalanGa (MATRIKS M){
+    indeks i, j;
+    return (Elmt(M, i, j) != 'W' || Elmt(M, i, j) != '*' || Elmt(M, i, j) != 'O'|| Elmt(M, i, j) != 'A');
+}
+
+
+
+void wasd (MATRIKS M){
+    char jalan;
+    scanf("%c", &jalan);
+    if (jalan == 'w' || jalan == 'W'){
+        if (JalanGa){
+
+        }
+    }
+}
+
+
+
