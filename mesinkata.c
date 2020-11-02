@@ -82,15 +82,12 @@ boolean IsKataSama(Kata K1,Kata K2)
     else
     {
         int i=0;
-        while (i<K1.Length)
+        while (i<=K1.Length)
         {
             if (K1.TabKata[i]!=K2.TabKata[i]){
                 same=false;
             }
-            else
-            {
                 i++;
-            }
             
         }
         

@@ -59,14 +59,17 @@ while (!IsKataSama(input,KataEXIT))
         TulisMATRIKS(M);
 
         boolean cekjalan = true;
-        char jalan;
+        char jalan[1];
+        int jalan2;
         while (cekjalan){
-            scanf("%c", &jalan);
-            if (jalan != 'w' && jalan != 'W' && jalan != 'a' && jalan != 'A' && jalan != 's' && jalan != 'S' && jalan != 'd' && jalan != 'D'){
-                cekjalan = false;
+            scanf("%s", &jalan);
+            jalan2=(int) jalan[0];
+            if (jalan2 != 'w' && jalan2 != 'W' && jalan2 != 'a' && jalan2 != 'A' && jalan2 != 's' && jalan2 != 'S' && jalan2 != 'd'&& jalan2 != 'D'){
+                printf("fu\n");
             }
             else{
-                wasd(M, cariPoint(M, 'P'), jalan);
+                M=wasd(M, cariPoint(M, 'P'), jalan[0]);
+                TulisMATRIKS(M);
             }
         }
 

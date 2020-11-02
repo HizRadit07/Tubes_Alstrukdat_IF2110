@@ -101,7 +101,7 @@ boolean Jalan (MATRIKS M, indeks i, indeks j){
 
 
 
-void wasd (MATRIKS M, POINT P, char jalan){
+MATRIKS wasd (MATRIKS M, POINT P, char jalan){
     if (jalan == 'w' || jalan == 'W'){
         if (Jalan(M, Absis(P)-1, Ordinat(P))){
             char temp = Elmt(M, Absis(P), Ordinat(P));
@@ -133,7 +133,7 @@ void wasd (MATRIKS M, POINT P, char jalan){
             Elmt(M, Absis(P), Ordinat(P)+1) = temp;
         }
     }
-    TulisMATRIKS(M);
+    return M;
 }
 
 POINT cariPoint (MATRIKS M, char Z){
