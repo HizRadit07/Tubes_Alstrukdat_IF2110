@@ -3,6 +3,7 @@
 #include "boolean.h"
 #include "matriks.h"
 #include <stdio.h>
+#include "point.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -45,7 +46,7 @@ boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
 /* ********** KELOMPOK BACA/TULIS ********** */ 
 void BacaMATRIKS (MATRIKS * M, int NB, int NK, char filename[30]){
     FILE *pf;
-    pf = fopen ("map2.txt", "r");
+    pf = fopen (filename, "r");
     if (pf == NULL)
         printf("maap gan");
 
@@ -92,22 +93,63 @@ int NBElmt (MATRIKS M){
 }
 /* Mengirimkan banyaknya elemen M */
 
-boolean JalanGa (MATRIKS M){
-    indeks i, j;
-    return (Elmt(M, i, j) != 'W' || Elmt(M, i, j) != '*' || Elmt(M, i, j) != 'O'|| Elmt(M, i, j) != 'A');
+
+boolean Jalan (MATRIKS M, indeks i, indeks j){
+    return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A');
 }
 
 
 
-void wasd (MATRIKS M){
-    char jalan;
-    scanf("%c", &jalan);
-    if (jalan == 'w' || jalan == 'W'){
-        if (JalanGa){
 
+void wasd (MATRIKS M, POINT P, char jalan){
+    if (jalan == 'w' || jalan == 'W'){
+        if (Jalan(M, Absis(P)-1, Ordinat(P))){
+            char temp = Elmt(M, Absis(P), Ordinat(P));
+            Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)-1, Ordinat(P));
+            Elmt(M, Absis(P)-1, Ordinat(P)) = temp;
         }
     }
+
+    if (jalan == 'a' || jalan == 'A'){
+        if (Jalan(M, Absis(P), Ordinat(P)-1)){
+            char temp = Elmt(M, Absis(P), Ordinat(P));
+            Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)-1);
+            Elmt(M, Absis(P), Ordinat(P)-1) = temp;
+        }
+    }
+
+    if (jalan == 's' || jalan == 'S'){
+        if (Jalan(M, Absis(P)+1, Ordinat(P))){
+            char temp = Elmt(M, Absis(P), Ordinat(P));
+            Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)+1, Ordinat(P));
+            Elmt(M, Absis(P)+1, Ordinat(P)) = temp;
+        }
+    }
+
+    if (jalan == 'd' || jalan == 'D'){
+        if (Jalan(M, Absis(P), Ordinat(P)+1)){
+            char temp = Elmt(M, Absis(P), Ordinat(P));
+            Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)+1);
+            Elmt(M, Absis(P), Ordinat(P)+1) = temp;
+        }
+    }
+    TulisMATRIKS(M);
 }
+
+POINT cariPoint (MATRIKS M, char Z){
+    POINT P;
+    for (int i = 0; i < NBrsEff(M); i++){
+        for (int j = 0; j < NKolEff(M); j++){
+            if (Elmt(M, i, j) == Z){
+                P = MakePOINT(i, j);
+            }
+        }
+    }
+    return P;
+}
+
+
+
 
 
 
