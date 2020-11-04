@@ -70,7 +70,6 @@ while (!IsKataSama(input,KataEXIT))
 
         /*we always start at map2 hence TulisMatriks(M2)*/
         /*inisialisasi semua elemen map*/
-        Elmt(M2,5,3)='P';//initialize player
         TulisMATRIKS(M2);
         boolean cekjalan = true;
         char jalan[1];
@@ -88,44 +87,52 @@ while (!IsKataSama(input,KataEXIT))
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/
                 if (mapstatus==2 && Elmt(M2,2,5)=='P' && jalan2=='d'){
+                    Elmt(M2,2,5)='-';
                     Elmt(M1,2,1)='P';
                     posisi=cariPoint(M1,'P');
                     mapstatus=1;
                 }
                 if (mapstatus==2 && Elmt(M2,5,3)=='P' && jalan2=='s'){
+                    Elmt(M2,5,3)='-';
                     Elmt(M3,1,3)='P';
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;
                 }
                 /*map 1 gate movements*/
                 if (mapstatus==1 && Elmt(M1,2,1)=='P' && jalan2=='a'){
+                    Elmt(M1,2,1)='-';
                     Elmt(M2,2,5)='P';
                     posisi=cariPoint(M2,'P');
                     mapstatus=2;
                 }
                 if (mapstatus==1 && Elmt(M1,5,4)=='P' && jalan2=='s'){
+                    Elmt(M1,5,4)='-';
                     Elmt(M4,1,4)='P';
                     posisi=cariPoint(M4,'P');
                     mapstatus=4;
                 }
                 /*map 3 gate movements*/
                 if (mapstatus==3 && Elmt(M3,1,3)=='P' && jalan2=='w'){
+                     Elmt(M3,1,3)='-';
                     Elmt(M2,5,3)='P';
                     posisi=cariPoint(M2,'P');
                     mapstatus=2;
                 }
                 if (mapstatus==3 && Elmt(M3,3,5)=='P' && jalan2=='d'){
+                    Elmt(M3,3,5)='-';
                     Elmt(M4,3,1)='P';
                     posisi=cariPoint(M4,'P');
                     mapstatus=4;
                 }
                 /*map 4 gate movements */
                 if (mapstatus==4 && Elmt(M4,1,4)=='P' && jalan2=='w'){
+                    Elmt(M4,1,4)='-';
                     Elmt(M1,5,4)='P';
                     posisi=cariPoint(M1,'P');
                     mapstatus=1;
                 }
                 if (mapstatus==4 && Elmt(M4,3,1)=='P' && jalan2=='a'){
+                     Elmt(M4,3,1)='-';
                     Elmt(M3,3,5)='P';
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;
