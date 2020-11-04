@@ -48,28 +48,109 @@ while (!IsKataSama(input,KataEXIT))
 {   
     //opsi 1 untuk main menu//
     if (IsKataSama(input,KataNew)){
-        printf("Masih dalam progres :)\n");
         
-        MATRIKS M;
+    MATRIKS M1,M2,M3,M4;
+     /*Initialize the matrices*/
         int NB = 7;
         int NK = 7;
-        char filename[30] = "map2.txt";
-        MakeMATRIKS(NB, NK, &M);
-        BacaMATRIKS(&M, NB, NK, filename);
-        TulisMATRIKS(M);
+        char filename1[30] = "map1.txt";
+        char filename2[30] = "map2.txt";
+        char filename3[30] = "map3.txt";
+        char filename4[30] = "map4.txt";
+        /*make the matrices*/
+        MakeMATRIKS(NB, NK, &M1);
+        MakeMATRIKS(NB, NK, &M2);
+        MakeMATRIKS(NB, NK, &M3);
+        MakeMATRIKS(NB, NK, &M4);
+        /*read the matrices*/
+        BacaMATRIKS(&M1, NB, NK, filename1);
+        BacaMATRIKS(&M2, NB, NK, filename2);
+        BacaMATRIKS(&M3, NB, NK, filename3);
+        BacaMATRIKS(&M4, NB, NK, filename4);
 
+        /*we always start at map2 hence TulisMatriks(M2)*/
+        /*inisialisasi semua elemen map*/
+        Elmt(M2,5,3)='P';//initialize player
+        TulisMATRIKS(M2);
         boolean cekjalan = true;
         char jalan[1];
         int jalan2;
+        int mapstatus=2;
+        POINT posisi;
+        posisi=cariPoint(M2,'P');
+        /*loop untuk jalan*/
         while (cekjalan){
             scanf("%s", &jalan);
             jalan2=(int) jalan[0];
             if (jalan2 != 'w' && jalan2 != 'W' && jalan2 != 'a' && jalan2 != 'A' && jalan2 != 's' && jalan2 != 'S' && jalan2 != 'd'&& jalan2 != 'D'){
-                printf("fu\n");
+                cekjalan=false;
             }
-            else{
-                M=wasd(M, cariPoint(M, 'P'), jalan[0]);
-                TulisMATRIKS(M);
+            else{/*code if moving through gate*/
+                /*map 2 gate movements*/
+                if (mapstatus==2 && Elmt(M2,2,5)=='P' && jalan2=='d'){
+                    Elmt(M1,2,1)='P';
+                    posisi=cariPoint(M1,'P');
+                    mapstatus=1;
+                }
+                if (mapstatus==2 && Elmt(M2,5,3)=='P' && jalan2=='s'){
+                    Elmt(M3,1,3)='P';
+                    posisi=cariPoint(M3,'P');
+                    mapstatus=3;
+                }
+                /*map 1 gate movements*/
+                if (mapstatus==1 && Elmt(M1,2,1)=='P' && jalan2=='a'){
+                    Elmt(M2,2,5)='P';
+                    posisi=cariPoint(M2,'P');
+                    mapstatus=2;
+                }
+                if (mapstatus==1 && Elmt(M1,5,4)=='P' && jalan2=='s'){
+                    Elmt(M4,1,4)='P';
+                    posisi=cariPoint(M4,'P');
+                    mapstatus=4;
+                }
+                /*map 3 gate movements*/
+                if (mapstatus==3 && Elmt(M3,1,3)=='P' && jalan2=='w'){
+                    Elmt(M2,5,3)='P';
+                    posisi=cariPoint(M2,'P');
+                    mapstatus=2;
+                }
+                if (mapstatus==3 && Elmt(M3,3,5)=='P' && jalan2=='d'){
+                    Elmt(M4,3,1)='P';
+                    posisi=cariPoint(M4,'P');
+                    mapstatus=4;
+                }
+                /*map 4 gate movements */
+                if (mapstatus==4 && Elmt(M4,1,4)=='P' && jalan2=='w'){
+                    Elmt(M1,5,4)='P';
+                    posisi=cariPoint(M1,'P');
+                    mapstatus=1;
+                }
+                if (mapstatus==4 && Elmt(M4,3,1)=='P' && jalan2=='a'){
+                    Elmt(M3,3,5)='P';
+                    posisi=cariPoint(M3,'P');
+                    mapstatus=3;
+                }
+                /*code for moving in the matrix*/
+                if (mapstatus==1){
+                M1=wasd(M1, posisi, jalan[0]);
+                TulisMATRIKS(M1);
+                posisi=cariPoint(M1,'P');
+                }
+                if (mapstatus==2){
+                M2=wasd(M2, posisi, jalan[0]);
+                TulisMATRIKS(M2);
+                posisi=cariPoint(M2,'P');
+                }
+                if (mapstatus==3){
+                M3=wasd(M3, posisi, jalan[0]);
+                TulisMATRIKS(M3);
+                posisi=cariPoint(M3,'P');
+                }
+                if (mapstatus==4){
+                M4=wasd(M4, posisi, jalan[0]);
+                TulisMATRIKS(M4);
+                posisi=cariPoint(M4,'P');
+                }
             }
         }
 

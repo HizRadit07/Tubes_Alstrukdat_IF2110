@@ -95,11 +95,8 @@ int NBElmt (MATRIKS M){
 
 
 boolean Jalan (MATRIKS M, indeks i, indeks j){
-    return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A');
+    return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A' && Elmt(M, i, j) != '>' && Elmt(M, i, j) != '<' && Elmt(M, i, j) != '^' && Elmt(M, i, j) != 'V');
 }
-
-
-
 
 MATRIKS wasd (MATRIKS M, POINT P, char jalan){
     if (jalan == 'w' || jalan == 'W'){
@@ -107,6 +104,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)-1, Ordinat(P));
             Elmt(M, Absis(P)-1, Ordinat(P)) = temp;
+            Ordinat(P)++;
         }
     }
 
@@ -115,6 +113,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)-1);
             Elmt(M, Absis(P), Ordinat(P)-1) = temp;
+            Absis(P)--;
         }
     }
 
@@ -123,6 +122,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)+1, Ordinat(P));
             Elmt(M, Absis(P)+1, Ordinat(P)) = temp;
+            Ordinat(P)--;
         }
     }
 
@@ -131,6 +131,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)+1);
             Elmt(M, Absis(P), Ordinat(P)+1) = temp;
+            Absis(P)++;
         }
     }
     return M;
