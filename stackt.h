@@ -6,12 +6,13 @@
 #define stackt_H
 
 #include "boolean.h"
+#include "mesinkata.h"
 
 #define Nil -1
 #define MaxEl 10
 /* Nil adalah stack dengan elemen kosong . */
 
-typedef int infotype;
+typedef Kata infotype;
 typedef int address;   /* indeks tabel */
 
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */

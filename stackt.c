@@ -3,6 +3,7 @@
 #include "boolean.h"
 #include "stackt.h"
 #include <stdlib.h>
+#include "mesinkata.h"
 
 /* *** Konstruktor/Kreator *** */
 void CreateEmpty (Stack *S)
