@@ -75,37 +75,47 @@ void SalinKata()
 
 boolean IsKataSama(Kata K1,Kata K2)
 /*Menghasilkan true jika K1 = K2*/
-{   boolean same=true;
-    if (K1.Length!=K2.Length){
-        same=false;
-    }
-    else
-    {
-        int i=0;
-        while (i<=K1.Length)
-        {
-            if (K1.TabKata[i]!=K2.TabKata[i]){
-                same=false;
-            }
-                i++;
-            
-        }
-        
-    }
-    return same;
-}
-Kata ScanKata()
-/*fungsi untuk membaca input string dari pengguna dan mereturn kata*/
-{
-    Kata hasil;
-    char a[50];
-    int length;
+{  
+    int i;
+	boolean sama;
+	sama = true;
 
-    gets(a);
-    hasil.Length=strlen(a);
-    for (int i = 0; i < strlen(a); i++)
-    {
-        hasil.TabKata[i]=a[i];
-    }
-   return hasil; 
+	if (K1.Length != K2.Length){
+		return false;
+	} else {
+		i = 0;
+		while ((sama)&&(i < K1.Length)){
+			sama = (K1.TabKata[i] == K2.TabKata[i]);
+			i++;
+		}
+		return (sama);
+	}
+}
+
+void PrintKata (Kata K)
+/* I.S. Kata K terdefinisi */
+/* F.S. K tercetak di layar tanpa karakter tambahan di awal maupun di akhir */
+{
+	int i = 0;
+	while (i<K.Length)
+	{
+		printf("%c", K.TabKata[i]);
+		i++;
+	}
+}
+
+void InputUser(Kata *K)
+/* I.S. Sembarang */
+/* F.S. menginput masukan kata dari user dan menyimpannya di K */
+{
+	char c;
+	int i = 0;
+	scanf("%c",&c);
+	while (c != '\n')
+	{
+		(*K).TabKata[i] = c;
+		++i;
+		scanf("%c",&c);
+	}
+	(*K).Length = i;
 }

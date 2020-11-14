@@ -44,9 +44,15 @@ void SalinKata();
           CC = BLANK atau CC = MARK; 
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
 boolean IsKataSama(Kata K1,Kata K2);
 /*Menghasilkan true jika K1 = K2*/
-Kata ScanKata();
-/*fungsi untuk membaca input string dari pengguna dan mereturn kata*/
 
+void PrintKata (Kata K);
+/* I.S. Kata K terdefinisi */
+/* F.S. K tercetak di layar tanpa karakter tambahan di awal maupun di akhir */
+
+void InputUser(Kata *K);
+/* I.S. Sembarang */
+/* F.S. menginput masukan kata dari user dan menyimpannya di K */
 #endif

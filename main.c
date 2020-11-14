@@ -43,7 +43,7 @@ printf("\n");
 print_mainmenu();
 printf("\n");
 printf("Masukkan input: ");
-input=ScanKata();
+InputUser(&input);
 while (!IsKataSama(input,KataEXIT))
 {   
     //opsi 1 untuk main menu//
@@ -169,7 +169,7 @@ while (!IsKataSama(input,KataEXIT))
     }
     print_mainmenu();
     printf("Masukkan input: ");
-    input=ScanKata();
+    InputUser(&input);
 }
 
     return 0;
