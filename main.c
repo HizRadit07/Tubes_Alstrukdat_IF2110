@@ -15,6 +15,8 @@
 #include "point.c"
 #include "stackt.h"
 #include "stackt.c"
+#include "undoexec.c"
+#include "office.c"
 
 void mainPhase(Stack *S, Jam *J, boolean prepPhase){
     infotype X;
@@ -34,7 +36,7 @@ void mainPhase(Stack *S, Jam *J, boolean prepPhase){
         printf("\n");
     }
     else{
-        printf("Anda sudah berada di Main Phase.\n");
+        printf("***Anda sudah berada di Main Phase.***\n");
     }
 }
 
@@ -66,13 +68,18 @@ Kata KataOffice;
 KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
 Kata KataRepair;
 KataRepair.TabKata[0]='r';KataRepair.TabKata[1]='e';KataRepair.TabKata[2]='p';KataRepair.TabKata[3]='a';KataRepair.TabKata[4]='i';KataRepair.TabKata[5]='r';KataRepair.Length=6;
-
+Kata KataBuy;
+KataBuy.TabKata[0] = 'b'; KataBuy.TabKata[1] = 'u'; KataBuy.TabKata[2] = 'y'; KataBuy.Length=3;
 Kata KataBuild;
 KataBuild.TabKata[0] = 'b'; KataBuild.TabKata[1] = 'u'; KataBuild.TabKata[2] = 'i'; KataBuild.TabKata[3] = 'l'; KataBuild.TabKata[4] = 'd'; KataBuild.Length=5;
+Kata KataUpgrade;
+KataUpgrade.TabKata[0] = 'u'; KataUpgrade.TabKata[1] = 'p'; KataUpgrade.TabKata[2] = 'g'; KataUpgrade.TabKata[3] = 'r'; KataUpgrade.TabKata[4] = 'a'; KataUpgrade.TabKata[5] = 'd'; KataUpgrade.TabKata[6] = 'e'; KataUpgrade.Length = 6;
 Kata KataUndo;
 KataUndo.TabKata[0]='u';KataUndo.TabKata[1]='n';KataUndo.TabKata[2]='d';KataUndo.TabKata[3]='0';KataUndo.Length=4;
 Kata KataExecute;
 KataExecute.TabKata[0]='e';KataExecute.TabKata[1]='x';KataExecute.TabKata[2]='e';KataExecute.TabKata[3]='c';KataExecute.TabKata[4]='u';KataExecute.TabKata[5]='t';KataExecute.TabKata[6]='e';KataExecute.Length=7;
+Kata KataOffice;
+KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
 Kata a;
 a.TabKata[0]='a';a.Length=1;
 Kata A;
@@ -92,6 +99,7 @@ d.TabKata[0]='d';d.Length=1;
 
 /*inisialisasi jam global*/
 Jam JGlobal=MakeJam(14,50,0);
+/*inisialisasi stack*/
 Stack Prep;
 CreateEmpty(&Prep);
 //main program//
@@ -165,7 +173,31 @@ while (!IsKataSama(input,KataEXIT))
                 mainPhase(&Prep, &JGlobal, prepPhase);
                 
             }
+            else if (IsKataSama(command, KataOffice)){
+                office(mapstatus);
+            }
+            else if(IsKatasama(command,KataBuild)){
+                //command yg buat build ngapain gitu//
+                //push ke stack gitu//
+            }
+            else if(IsKatasama(command,KataUpgrade)){
+                //command yg buat build ngapain gitu//
+                //push ke stack gitu//
+            }
+            else if(IsKataSama(command, KataExecute)){
+                // Mengerjakan semua perintah dalam stack prep
+                // execute(Prep, KataBuild, KataUpgrade, KataBuy);
+            }
+            else if(IsKataSama(command, KataUndo)){
+                // Membuang command di dalam stack prep
+                // undo(&Prep);
+            }
             
+            else if (IsKataSama(command, KataBuy)) {
+                // Buy
+                // buy(int Money, char Material[12][20], int hargaMaterial[12], int TempMoney)
+                // On progress
+            }
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/
                 if (mapstatus==2 && Elmt(M2,2,5)=='P' && IsKataSama(command,d)){

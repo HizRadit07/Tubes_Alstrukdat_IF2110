@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mesinkata.h"
-int main(){
-    int mapstatus=2;
-    Kata KataOffice;
-    int decision;
-    KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
-    if (mapstatus==2 && IsKataSama(command,KataOffice)){
+void office(int mapstatus){
+    if (mapstatus==2){
         for (int i = 0; i < len(arr), i++){
             printf("Selamat datang di office\n ");
             printf("Detail wahana :");
@@ -26,10 +22,8 @@ int main(){
             printf("  3. Berapa kali wahana dinaiki dalam hari ini : \n");
             printf("  4. Total penghasilan dari wahana dalam hari ini : \n");
         }
-    scanf("%d",&decision);  
-        //edit bagian sini dong kal//
-        //begitu//
-        //kira2 klo kita di office mau ngapain//
     }
-    return 0;
+    else{
+        printf("***Anda tidak berada di Map 1***\n");
+    }
 }
