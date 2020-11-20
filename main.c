@@ -6,12 +6,37 @@
 #include "mesinkata.h"
 #include "mesinkar.c"
 #include "mesinkata.c"
-
+#include "jam.h"
+#include "jam.c"
 #include "boolean.h"
 #include "matriks.h"
 #include "matriks.c"
 #include "point.h"
 #include "point.c"
+#include "stackt.h"
+#include "stackt.c"
+
+void mainPhase(Stack *S, Jam *J, boolean prepPhase){
+    infotype X;
+    if (prepPhase == true){
+        while (!IsEmpty(*S)){
+            if(Top(*S) != Nil){
+                Pop(S, &X);
+            }
+        }
+        Hour(*J) = 7;
+        Minute(*J) = 0;
+        Second(*J) = 0;
+        prepPhase = false;
+        printf("Anda memasuki main phase\n");
+        printf("Sekarang jam : ");
+        TulisJam(*J);
+        printf("\n");
+    }
+    else{
+        printf("Anda sudah berada di Main Phase.\n");
+    }
+}
 
 void print_title(){
 //prosedur menulis title card yaitu Willy Wangky's workd//
@@ -30,13 +55,45 @@ void print_mainmenu(){
 
 int main(){
 //nanti list untuk katanya bisa diletakkan disini//
-//initialize kata exit//
 Kata KataEXIT;
 KataEXIT.TabKata[0]='e';KataEXIT.TabKata[1]='x';KataEXIT.TabKata[2]='i';KataEXIT.TabKata[3]='t';KataEXIT.Length=4;
 Kata KataNew;
 KataNew.TabKata[0]='n';KataNew.TabKata[1]='e';KataNew.TabKata[2]='w';KataNew.Length=3;
 Kata input;
+Kata KataMAIN;
+KataMAIN.TabKata[0] = 'm'; KataMAIN.TabKata[1] = 'a'; KataMAIN.TabKata[2] = 'i'; KataMAIN.TabKata[3] = 'n'; KataMAIN.Length = 4;
+Kata KataOffice;
+KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
+Kata KataRepair;
+KataRepair.TabKata[0]='r';KataRepair.TabKata[1]='e';KataRepair.TabKata[2]='p';KataRepair.TabKata[3]='a';KataRepair.TabKata[4]='i';KataRepair.TabKata[5]='r';KataRepair.Length=6;
 
+Kata KataBuild;
+KataBuild.TabKata[0] = 'b'; KataBuild.TabKata[1] = 'u'; KataBuild.TabKata[2] = 'i'; KataBuild.TabKata[3] = 'l'; KataBuild.TabKata[4] = 'd'; KataBuild.Length=5;
+Kata KataUndo;
+KataUndo.TabKata[0]='u';KataUndo.TabKata[1]='n';KataUndo.TabKata[2]='d';KataUndo.TabKata[3]='0';KataUndo.Length=4;
+Kata KataExecute;
+KataExecute.TabKata[0]='e';KataExecute.TabKata[1]='x';KataExecute.TabKata[2]='e';KataExecute.TabKata[3]='c';KataExecute.TabKata[4]='u';KataExecute.TabKata[5]='t';KataExecute.TabKata[6]='e';KataExecute.Length=7;
+Kata a;
+a.TabKata[0]='a';a.Length=1;
+Kata A;
+A.TabKata[0]='A';A.Length=1;
+Kata w;
+w.TabKata[0]='w';w.Length=1;
+Kata W;
+W.TabKata[0]='W';W.Length=1;
+Kata S;
+S.TabKata[0]='S';S.Length=1;
+Kata s;
+s.TabKata[0]='s';s.Length=1;
+Kata D;
+D.TabKata[0]='D';D.Length=1;
+Kata d;
+d.TabKata[0]='d';d.Length=1;
+
+/*inisialisasi jam global*/
+Jam JGlobal=MakeJam(14,50,0);
+Stack Prep;
+CreateEmpty(&Prep);
 //main program//
 print_title();
 printf("\n");
@@ -44,11 +101,12 @@ print_mainmenu();
 printf("\n");
 printf("Masukkan input: ");
 InputUser(&input);
+boolean prepPhase = true;
 while (!IsKataSama(input,KataEXIT))
 {   
     //opsi 1 untuk main menu//
     if (IsKataSama(input,KataNew)){
-        
+     
     MATRIKS M1,M2,M3,M4;
      /*Initialize the matrices*/
         int NB = 7;
@@ -68,100 +126,151 @@ while (!IsKataSama(input,KataEXIT))
         BacaMATRIKS(&M3, NB, NK, filename3);
         BacaMATRIKS(&M4, NB, NK, filename4);
 
+        /*inisialisasi nama player*/
+        char nama[100];
+        printf("Masukkan Username : ");
+        fgets(nama, 100, stdin);
+        printf(nama);
+        int money=1000;
         /*we always start at map2 hence TulisMatriks(M2)*/
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
         boolean cekjalan = true;
-        char jalan[1];
-        int jalan2;
+        Kata command;
         int mapstatus=2;
         POINT posisi;
         posisi=cariPoint(M2,'P');
         /*loop untuk jalan*/
         while (cekjalan){
-            scanf("%s", &jalan);
-            jalan2=(int) jalan[0];
-            if (jalan2 != 'w' && jalan2 != 'W' && jalan2 != 'a' && jalan2 != 'A' && jalan2 != 's' && jalan2 != 'S' && jalan2 != 'd'&& jalan2 != 'D'){
+            printf("Halo ");
+            printf(nama);
+            printf("Uang anda : $ %d\n", money);
+            printf("Saat ini jam -> ");
+            TulisJam(JGlobal);
+            printf("\n");
+            printf("Masukkan command: ");
+            InputUser(&command);
+            if (Hour(JGlobal) >= 15 || Hour(JGlobal) < 7){
+                    prepPhase = true;
+                    printf("Ini prep phase\n");
+            }
+            if(Hour(JGlobal) < 15 && Hour(JGlobal) >= 7){
+                prepPhase = false;
+                printf("Ini main phase\n");
+            }
+            if (IsKataSama(command,KataEXIT)){
                 cekjalan=false;
             }
+            else if (IsKataSama(command, KataMAIN)){
+                mainPhase(&Prep, &JGlobal, prepPhase);
+                
+            }
+            
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/
-                if (mapstatus==2 && Elmt(M2,2,5)=='P' && jalan2=='d'){
+                if (mapstatus==2 && Elmt(M2,2,5)=='P' && IsKataSama(command,d)){
                     Elmt(M2,2,5)='-';
                     Elmt(M1,2,1)='P';
                     posisi=cariPoint(M1,'P');
                     mapstatus=1;
                 }
-                if (mapstatus==2 && Elmt(M2,5,3)=='P' && jalan2=='s'){
+                if (mapstatus==2 && Elmt(M2,5,3)=='P' && IsKataSama(command,s)){
                     Elmt(M2,5,3)='-';
                     Elmt(M3,1,3)='P';
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;
                 }
                 /*map 1 gate movements*/
-                if (mapstatus==1 && Elmt(M1,2,1)=='P' && jalan2=='a'){
+                if (mapstatus==1 && Elmt(M1,2,1)=='P' && IsKataSama(command,a)){
                     Elmt(M1,2,1)='-';
                     Elmt(M2,2,5)='P';
                     posisi=cariPoint(M2,'P');
                     mapstatus=2;
                 }
-                if (mapstatus==1 && Elmt(M1,5,4)=='P' && jalan2=='s'){
+                if (mapstatus==1 && Elmt(M1,5,4)=='P' && IsKataSama(command,s)){
                     Elmt(M1,5,4)='-';
                     Elmt(M4,1,4)='P';
                     posisi=cariPoint(M4,'P');
                     mapstatus=4;
                 }
                 /*map 3 gate movements*/
-                if (mapstatus==3 && Elmt(M3,1,3)=='P' && jalan2=='w'){
+                if (mapstatus==3 && Elmt(M3,1,3)=='P' && IsKataSama(command,w)){
                      Elmt(M3,1,3)='-';
                     Elmt(M2,5,3)='P';
                     posisi=cariPoint(M2,'P');
                     mapstatus=2;
                 }
-                if (mapstatus==3 && Elmt(M3,3,5)=='P' && jalan2=='d'){
+                if (mapstatus==3 && Elmt(M3,3,5)=='P' && IsKataSama(command,d)){
                     Elmt(M3,3,5)='-';
                     Elmt(M4,3,1)='P';
                     posisi=cariPoint(M4,'P');
                     mapstatus=4;
                 }
                 /*map 4 gate movements */
-                if (mapstatus==4 && Elmt(M4,1,4)=='P' && jalan2=='w'){
+                if (mapstatus==4 && Elmt(M4,1,4)=='P' && IsKataSama(command,w)){
                     Elmt(M4,1,4)='-';
                     Elmt(M1,5,4)='P';
                     posisi=cariPoint(M1,'P');
                     mapstatus=1;
                 }
-                if (mapstatus==4 && Elmt(M4,3,1)=='P' && jalan2=='a'){
+                if (mapstatus==4 && Elmt(M4,3,1)=='P' && IsKataSama(command,a)){
+                    Elmt(M4,3,1)='-';
+                    Elmt(M3,3,5)='P';
+                    posisi=cariPoint(M3,'P');
+                    mapstatus=3;
+                }
+                
+                if (mapstatus==3 && Elmt(M3,3,5)=='P' && IsKataSama(command,d)){
+                    Elmt(M3,3,5)='-';
+                    Elmt(M4,3,1)='P';
+                    posisi=cariPoint(M4,'P');
+                    mapstatus=4;
+                }
+                /*map 4 gate movements */
+                if (mapstatus==4 && Elmt(M4,1,4)=='P' && IsKataSama(command,w)){
+                    Elmt(M4,1,4)='-';
+                    Elmt(M1,5,4)='P';
+                    posisi=cariPoint(M1,'P');
+                    mapstatus=1;
+                }
+                if (mapstatus==4 && Elmt(M4,3,1)=='P' && IsKataSama(command,a)){
                      Elmt(M4,3,1)='-';
                     Elmt(M3,3,5)='P';
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;
                 }
+                
                 /*code for moving in the matrix*/
                 if (mapstatus==1){
-                M1=wasd(M1, posisi, jalan[0]);
+                M1=wasd(M1, posisi, command);
                 TulisMATRIKS(M1);
                 posisi=cariPoint(M1,'P');
+                int plus = JamToDetik(JGlobal) + 60;
+                JGlobal = DetikToJam(plus);
                 }
                 if (mapstatus==2){
-                M2=wasd(M2, posisi, jalan[0]);
+                M2=wasd(M2, posisi, command);
                 TulisMATRIKS(M2);
                 posisi=cariPoint(M2,'P');
+                int plus = JamToDetik(JGlobal) + 60;
+                JGlobal = DetikToJam(plus);
                 }
                 if (mapstatus==3){
-                M3=wasd(M3, posisi, jalan[0]);
+                M3=wasd(M3, posisi, command);
                 TulisMATRIKS(M3);
                 posisi=cariPoint(M3,'P');
+                int plus = JamToDetik(JGlobal) + 60;
+                JGlobal = DetikToJam(plus);
                 }
                 if (mapstatus==4){
-                M4=wasd(M4, posisi, jalan[0]);
+                M4=wasd(M4, posisi, command);
                 TulisMATRIKS(M4);
                 posisi=cariPoint(M4,'P');
+                int plus = JamToDetik(JGlobal) + 60;
+                JGlobal = DetikToJam(plus);
                 }
             }
         }
-
-
     }
     else
     {   

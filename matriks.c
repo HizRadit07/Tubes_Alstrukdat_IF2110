@@ -4,6 +4,7 @@
 #include "matriks.h"
 #include <stdio.h>
 #include "point.h"
+#include "mesinkata.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -98,8 +99,24 @@ boolean Jalan (MATRIKS M, indeks i, indeks j){
     return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A' && Elmt(M, i, j) != '>' && Elmt(M, i, j) != '<' && Elmt(M, i, j) != '^' && Elmt(M, i, j) != 'V');
 }
 
-MATRIKS wasd (MATRIKS M, POINT P, char jalan){
-    if (jalan == 'w' || jalan == 'W'){
+MATRIKS wasd (MATRIKS M, POINT P, Kata jalan){
+    Kata a;
+    a.TabKata[0]='a';a.Length=1;
+    Kata A;
+    A.TabKata[0]='A';A.Length=1;
+    Kata w;
+    w.TabKata[0]='w';w.Length=1;
+    Kata W;
+    W.TabKata[0]='W';W.Length=1;
+    Kata S;
+    S.TabKata[0]='S';S.Length=1;
+    Kata s;
+    s.TabKata[0]='s';s.Length=1;
+    Kata D;
+    D.TabKata[0]='D';D.Length=1;
+    Kata d;
+    d.TabKata[0]='d';d.Length=1;
+    if (IsKataSama(W, jalan) || IsKataSama(w, jalan)){
         if (Jalan(M, Absis(P)-1, Ordinat(P))){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)-1, Ordinat(P));
@@ -108,7 +125,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
         }
     }
 
-    if (jalan == 'a' || jalan == 'A'){
+    if (IsKataSama(A, jalan) || IsKataSama(a, jalan)){
         if (Jalan(M, Absis(P), Ordinat(P)-1)){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)-1);
@@ -117,7 +134,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
         }
     }
 
-    if (jalan == 's' || jalan == 'S'){
+    if (IsKataSama(S, jalan) || IsKataSama(s, jalan)){
         if (Jalan(M, Absis(P)+1, Ordinat(P))){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P)+1, Ordinat(P));
@@ -126,7 +143,7 @@ MATRIKS wasd (MATRIKS M, POINT P, char jalan){
         }
     }
 
-    if (jalan == 'd' || jalan == 'D'){
+    if (IsKataSama(D, jalan) || IsKataSama(d, jalan)){
         if (Jalan(M, Absis(P), Ordinat(P)+1)){
             char temp = Elmt(M, Absis(P), Ordinat(P));
             Elmt(M, Absis(P), Ordinat(P)) = Elmt(M, Absis(P), Ordinat(P)+1);
