@@ -188,6 +188,19 @@ int ConvertKataW(Kata in) {
     return val;
 }
 
+int ConvertKataChar(Kata in) {
+    int i;
+    char val;
+
+    val =0;
+    for(i = 0; i < in.Length; i++) {
+        val *= 10;
+        val += (in.TabKata[i] - '0');
+    } 
+
+    return val;
+}
+
 
 void SalinKataW(char cc)
 /* Mengakuisisi kata, menyimpan dalam CKata

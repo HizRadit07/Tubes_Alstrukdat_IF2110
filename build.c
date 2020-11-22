@@ -22,7 +22,7 @@ int uangtemp = 10000;
 
 
 
-void build(boolean prepPhase){
+void build(boolean prepPhase, MATRIKS M){
 //1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
 //2. Setelah pemain memilih wahana dasar yang ingin dibuat.
 //3. Jika resource untuk membangun wahana tidak mencukupi, maka akan ditampilkan pesan error.
@@ -38,6 +38,9 @@ int inventory_material_wahana[5];
     
     Kata nama = W.namaWahana;
     Kata bentuk = W.bentuk;
+    char charBentuk = scanf("%s", &bentuk);
+    printf("%s", charBentuk);
+    
     int biayaBuild = W.BiayaBuild;
     int biayaUpgrade = W.BiayaUpgrade;
     int waktuBuild = W.waktuBuild;
@@ -79,6 +82,29 @@ if (check){
     uangtemp = uangtemp - biayaBuild;
     if (uangtemp > 0){
     printf("building...\n");
+    POINT Player = cariPoint(M, 'P');
+    TulisMATRIKS(M);
+    TulisPOINT(Player);
+
+    printf("\n");
+    Elmt(M, Absis(Player), Ordinat(Player)) = charBentuk;
+   
+    if (Elmt(M,Absis(Player)-1, Ordinat(Player) ) == '-'){
+        Elmt(M,Absis(Player)-1, Ordinat(Player) ) = 'P';
+        Ordinat(Player)++;
+    }else if (Elmt(M,Absis(Player), Ordinat(Player)-1 ) == '-'){
+        Elmt(M,Absis(Player), Ordinat(Player)-1 ) = 'P';
+        Absis(Player)--;
+    }else if (Elmt(M,Absis(Player)+1, Ordinat(Player) ) == '-'){
+        Elmt(M,Absis(Player)+1, Ordinat(Player) ) = 'P';
+        Ordinat(Player)--;
+    }else if (Elmt(M,Absis(Player), Ordinat(Player) +1 ) == '-'){
+        Elmt(M,Absis(Player), Ordinat(Player) +1 ) = 'P';
+        Absis(Player)++;
+
+    }
+    TulisMATRIKS(M);
+
     printf("\n");
     printf("Sisa Inventory anda :\n");
     printf("Pasir : %d\n", inventorytemp[0]);
@@ -106,15 +132,33 @@ if (check){
 
 }
 
-MATRIKS buildingWahana(MATRIKS M, char dicari, char wahana){
+/*MATRIKS buildingWahana(MATRIKS M, char wahana){
     
-    POINT Player = cariPoint(M, dicari);
+    POINT Player = cariPoint(M, 'P');
     TulisMATRIKS(M);
     TulisPOINT(Player);
-    printf("\n");
-    TulisMATRIKS(M);
 
+    printf("\n");
+    Elmt(M, Absis(Player), Ordinat(Player)) = wahana;
+   
+    if (Elmt(M,Absis(Player)-1, Ordinat(Player) ) == '-'){
+        Elmt(M,Absis(Player)-1, Ordinat(Player) ) = 'P';
+        Ordinat(Player)++;
+    }else if (Elmt(M,Absis(Player), Ordinat(Player)-1 ) == '-'){
+        Elmt(M,Absis(Player), Ordinat(Player)-1 ) = 'P';
+        Absis(Player)--;
+    }else if (Elmt(M,Absis(Player)+1, Ordinat(Player) ) == '-'){
+        Elmt(M,Absis(Player)+1, Ordinat(Player) ) = 'P';
+        Ordinat(Player)--;
+    }else if (Elmt(M,Absis(Player), Ordinat(Player) +1 ) == '-'){
+        Elmt(M,Absis(Player), Ordinat(Player) +1 ) = 'P';
+        Absis(Player)++;
+
+    }
+    TulisMATRIKS(M);
+    
 }
+*/
 
 
 int main(){
@@ -126,10 +170,9 @@ int main(){
     BacaMATRIKS(&M2, NB, NK, filename2);
 
     boolean prep = true;
-    build(prep);
-    char player = "Pf";
-    char wahana = "@";
-    buildingWahana(M2, player, wahana);
+    build(prep, M2);
+  
+ 
 
 
 
