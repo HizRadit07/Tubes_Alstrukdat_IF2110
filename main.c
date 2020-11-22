@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <string.h>
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "mesinkar.c"
