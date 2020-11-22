@@ -1,15 +1,12 @@
 #include <stdio.h>
-#include <math.h>
 #include <stdlib.h>
-#include <ctype.h>
-#include "point.h"
 #include "boolean.h"
+#include "wahana.h"
+#include "wahana.c"
 #include "matriks.h"
 #include "matriks.c"
-#include "jam.h"
-#include <string.h>
-#include "build.h"
-
+#include "point.c"
+#include "point.h"
 
 
 int inventorytemp[5]= {
@@ -23,14 +20,6 @@ int inventorytemp[5]= {
 
 int uangtemp = 10000;
 
-struct wahana {
-
-    char bentuk[256];
-    int waktu;
-    int biaya;
-    int upgradewahana;
-    int req[5];
-};
 
 
 void build(boolean prepPhase){
@@ -40,25 +29,44 @@ void build(boolean prepPhase){
 //4. Setelah itu, perintah eksekusi ini akan dimasukkan ke dalam stack.
 if (prepPhase){
 
+Wahana W;
+STARTWahana("wahana.txt");
+loadWahana(&W);
+
+int inventory_material_wahana[5];
+
+    
+    Kata nama = W.namaWahana;
+    Kata bentuk = W.bentuk;
+    int biayaBuild = W.BiayaBuild;
+    int biayaUpgrade = W.BiayaUpgrade;
+    int waktuBuild = W.waktuBuild;
+    int waktuUpgrade = W.waktuUpgrade;
+    inventory_material_wahana[1] = W.pasir;
+    inventory_material_wahana[2] = W.besi;
+    inventory_material_wahana[3] = W.kaca;
+    inventory_material_wahana[4] = W.pintu;
+    inventory_material_wahana[5] = W.kayu;
 
 int i = 0;
 
-int wahana1 [5] = {10,10,10,10,10};
 
-struct wahana KomediPutar;
-strcpy( KomediPutar.bentuk, "@");
-KomediPutar.waktu, 3;
-KomediPutar.biaya, 5000;
+
 
 boolean check;
+printf("~ Wahana yang akan dibangun ~\n");
+printf("Nama Wahana : %s\n", nama);
+printf("Bentuk Wahana : %s\n", bentuk);
+printf("Biaya untuk membangun : %d\n",  biayaBuild);
+printf("Lama waktu untuk membangun : %d\n", waktuBuild);
+printf("\n");
 
-printf("%s\n", KomediPutar.bentuk);
 
 for (i = 0; i < 5; i++){
-    if (inventorytemp[i] >= wahana1[i] && (uangtemp >= KomediPutar.biaya)){
+    if (inventorytemp[i] >= inventory_material_wahana[i] ){
         check = true;
-        inventorytemp[i] = inventorytemp[i] - wahana1[i];
-        uangtemp = uangtemp - KomediPutar.biaya;
+        inventorytemp[i] = inventorytemp[i] - inventory_material_wahana[i];
+        
         
     }else{
         check = false;
@@ -67,9 +75,25 @@ for (i = 0; i < 5; i++){
 }
 
 if (check){
+    
+    uangtemp = uangtemp - biayaBuild;
+    if (uangtemp > 0){
     printf("building...\n");
-    printf("%d\n", inventorytemp[1]);
-    printf("%d\n", uangtemp);
+    printf("\n");
+    printf("Sisa Inventory anda :\n");
+    printf("Pasir : %d\n", inventorytemp[0]);
+    printf("Besi : %d\n", inventorytemp[1]);
+    printf("Kaca : %d\n", inventorytemp[2]);
+    printf("Pintu : %d\n", inventorytemp[3]);
+    printf("Kayu : %d\n", inventorytemp[4]);
+    printf("\n");
+    printf("Sisa Uang anda :\n");
+    printf("%d\n", uangtemp);}
+    else
+    {
+         printf("error, material kurang\n");
+    }
+    
 
 }else{
     printf("error, material kurang\n");
@@ -82,13 +106,32 @@ if (check){
 
 }
 
+MATRIKS buildingWahana(MATRIKS M, char dicari, char wahana){
+    
+    POINT Player = cariPoint(M, dicari);
+    TulisMATRIKS(M);
+    TulisPOINT(Player);
+    printf("\n");
+    TulisMATRIKS(M);
+
+}
 
 
 int main(){
+    int NB = 7;
+    int NK = 7;
+    MATRIKS M2;
+    char filename2[30] = "map2.txt";
+    MakeMATRIKS(NB, NK, &M2);
+    BacaMATRIKS(&M2, NB, NK, filename2);
 
-boolean prep = true;
-build(prep);
+    boolean prep = true;
+    build(prep);
+    char player = "P";
+    char wahana = "@";
+    buildingWahana(M2, player, wahana);
 
 
-return 0;
+
+    return 0;
 }

@@ -84,4 +84,6 @@ int NBElmt (MATRIKS M);
 
 /* ********** KELOMPOK TEST TERHADAP MATRIKS ********** */
 
+POINT cariPoint (MATRIKS M, char Z);
+
 #endif

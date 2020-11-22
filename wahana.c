@@ -1,8 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "wahana.h"
 #include "mesinkar.h"
 #include "mesinkar.c"
 #include "mesinkata.h"
+
 
 
 void loadWahana(Wahana *W){
@@ -57,6 +60,8 @@ void mainWahana(Wahana W){
     Kata bentuk = W.bentuk;
     int biayaBuild = W.BiayaBuild;
     int biayaUpgrade = W.BiayaUpgrade;
+    int waktuBuild = W.waktuBuild;
+    int waktuUpgrade = W.waktuUpgrade;
     inventory_material_wahana[0] = W.pasir;
     inventory_material_wahana[1] = W.besi;
     inventory_material_wahana[2] = W.kaca;
@@ -73,13 +78,3 @@ void mainWahana(Wahana W){
 }
 
 
-int main(){
-    Wahana W;
-   
-    STARTWahana("wahana.txt");
-    loadWahana(&W);
-    mainWahana(W);
-
-
-    return 0;
-}
