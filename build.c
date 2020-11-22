@@ -127,7 +127,7 @@ int main(){
 
     boolean prep = true;
     build(prep);
-    char player = "P";
+    char player = "Pf";
     char wahana = "@";
     buildingWahana(M2, player, wahana);
 
