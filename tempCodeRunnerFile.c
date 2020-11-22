@@ -8,7 +8,6 @@
 #include "matriks.c"
 #include "jam.h"
 #include <string.h>
-#include "build.h"
 
 
 

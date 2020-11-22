@@ -1,2 +1,2 @@
-@,Komedi Putar,5,10,10,5,5,5,
+KomediPutar @ 1000 1000 3 2 10 10 5 5 5
 
