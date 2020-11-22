@@ -115,21 +115,47 @@ for (int i = 0; i < 5; i++){
     inventory[i] = 0;
 }
 
-// Harusnya dri eksternal file
-char Maaterial[5][20] = {
-    "pasir",        //0
-    "besi",         //1
-    "kaca",         //2
-    "pintu",        //3
-    "kayu"          //4
-};
-int HargaaMaterial[5] = {
-    500, //0
-    600, //1
-    1000,//2
-    700, //3
-    200, //4
-};
+FILE    *filematerial = fopen("material.txt", "r");
+char    text_read[128];
+char    key_text[64];
+char    value_text[64];
+int     HargaaMaterial[5];
+char    Maaterial[5][20];
+int counterLine = 0;
+if (filematerial)
+{
+    while (fgets(text_read, 128, filematerial))
+    {
+        char * p;
+        //Separator ('/')
+        p = strchr(text_read, '/');
+        // Ngereset value
+        key_text[0] = '\0';
+        value_text[0] = '\0';
+    
+        if (p != 0)
+        {
+            size_t  key_length = 0;
+            key_length = p - text_read;
+            ++p;
+            strcpy(value_text, p);
+            strncpy(key_text, text_read, key_length);
+            key_text[key_length] = '\0';
+
+            strcpy(Maaterial[counterLine],key_text);
+            HargaaMaterial[counterLine] = atoi(value_text);
+            counterLine++;
+        }
+        else
+        {
+            fprintf(stdout,
+                    "Invalid formatted text: \"%s\"\n",
+                    text_read);
+        }
+    }
+} // End:  while fgets
+fclose(filematerial);
+
 /*inisialisasi stack*/
 Stack Prep;
 CreateEmpty(&Prep);
