@@ -16,7 +16,8 @@
 #include "stackt.h"
 #include "stackt.c"
 #include "undoexec.c"
-#include "office.c"
+#include "buy_material.c"
+/*#include "office.c"*/
 
 void mainPhase(Stack *S, Jam *J, boolean prepPhase){
     infotype X;
@@ -78,8 +79,6 @@ Kata KataUndo;
 KataUndo.TabKata[0]='u';KataUndo.TabKata[1]='n';KataUndo.TabKata[2]='d';KataUndo.TabKata[3]='0';KataUndo.Length=4;
 Kata KataExecute;
 KataExecute.TabKata[0]='e';KataExecute.TabKata[1]='x';KataExecute.TabKata[2]='e';KataExecute.TabKata[3]='c';KataExecute.TabKata[4]='u';KataExecute.TabKata[5]='t';KataExecute.TabKata[6]='e';KataExecute.Length=7;
-Kata KataOffice;
-KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
 Kata a;
 a.TabKata[0]='a';a.Length=1;
 Kata A;
@@ -99,6 +98,36 @@ d.TabKata[0]='d';d.Length=1;
 
 /*inisialisasi jam global*/
 Jam JGlobal=MakeJam(14,50,0);
+Jam JStart=MakeJam(7,0,0);
+Jam JSisa=MakeJam(0,0,0); JSisa = DetikToJam(JamToDetik(JStart) - JamToDetik(JGlobal) + 24*3600);
+/*Variable global buy dan material*/
+int jmlhStack=0;
+int tempMaterial[10][3];
+for (int i = 0; i < 10; i++){
+    for (int j = 0; j < 3; j++){
+        tempMaterial[i][j] = 0;
+    }
+}
+int inventory[5]; //Berisi Jumlah material
+for (int i = 0; i < 5; i++){
+    inventory[i] = 0;
+}
+
+// Harusnya dri eksternal file
+char Maaterial[5][20] = {
+    "pasir",        //0
+    "besi",         //1
+    "kaca",         //2
+    "pintu",        //3
+    "kayu"          //4
+};
+int HargaaMaterial[5] = {
+    500, //0
+    600, //1
+    1000,//2
+    700, //3
+    200, //4
+};
 /*inisialisasi stack*/
 Stack Prep;
 CreateEmpty(&Prep);
@@ -139,7 +168,8 @@ while (!IsKataSama(input,KataEXIT))
         printf("Masukkan Username : ");
         fgets(nama, 100, stdin);
         printf(nama);
-        int money=1000;
+        int money = 1000;
+        int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
@@ -173,14 +203,15 @@ while (!IsKataSama(input,KataEXIT))
                 mainPhase(&Prep, &JGlobal, prepPhase);
                 
             }
+            /*
             else if (IsKataSama(command, KataOffice)){
                 office(mapstatus);
-            }
-            else if(IsKatasama(command,KataBuild)){
+                */
+            else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
             }
-            else if(IsKatasama(command,KataUpgrade)){
+            else if(IsKataSama(command,KataUpgrade)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
             }
@@ -188,15 +219,13 @@ while (!IsKataSama(input,KataEXIT))
                 // Mengerjakan semua perintah dalam stack prep
                 // execute(Prep, KataBuild, KataUpgrade, KataBuy);
             }
-            else if(IsKataSama(command, KataUndo)){
+            else if(IsKataSama(command, KataUndo)){ 
                 // Membuang command di dalam stack prep
-                // undo(&Prep);
+                undo(&Prep, prepPhase);
             }
             
             else if (IsKataSama(command, KataBuy)) {
-                // Buy
-                // buy(int Money, char Material[12][20], int hargaMaterial[12], int TempMoney)
-                // On progress
+                buy(&tempMoney, Maaterial, HargaaMaterial, &Prep, &tempMaterial, &jmlhStack);
             }
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/
@@ -266,7 +295,7 @@ while (!IsKataSama(input,KataEXIT))
                     mapstatus=1;
                 }
                 if (mapstatus==4 && Elmt(M4,3,1)=='P' && IsKataSama(command,a)){
-                     Elmt(M4,3,1)='-';
+                    Elmt(M4,3,1)='-';
                     Elmt(M3,3,5)='P';
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;

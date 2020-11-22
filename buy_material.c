@@ -4,18 +4,11 @@
 #include <ctype.h>
 #include "mesinkar.h"
 #include "mesinkata.h"
-#include "mesinkar.c"
-#include "mesinkata.c"
-#include "jam.c"
 #include "jam.h"
 #include "boolean.h"
 #include "matriks.h"
-#include "matriks.c"
 #include "point.h"
-#include "point.c"
 #include "stackt.h"
-#include "stackt.c"
-
 
 // Harusnya dri eksternal file, tapi masih on progress
 
@@ -25,7 +18,6 @@
 //     "kaca",         //2
 //     "pintu",        //3
 //     "kayu"          //4
-
 // };
 
 // int hargaMaterial[5] = {
@@ -34,15 +26,15 @@
 //     1000,//2
 //     700, //3
 //     200, //4
-// };
-
+//
+// 
 
 
     
-void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[3]) {
-    int indexMaterial = tempmat[0];
-    int jmlhMaterial = tempmat[1];
-    int totalHarga = tempmat[2];
+void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[10][3], int *counter) {
+    int indexMaterial = tempmat[*counter][0];
+    int jmlhMaterial = tempmat[*counter][1];
+    int totalHarga = tempmat[*counter][2];
     // Penghitungan waktu dibutuhkan adalah 5menit(300detik) * jmlh material;
     int detikDibutuhkan = 300*jmlhMaterial;
     
@@ -59,7 +51,7 @@ void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[
 
 }
 
-void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek, int *tempmat[3]) {
+void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek, int *tempmat[10][3], int *counter) {
     printf("Daftar Harga Material\n");
     for (int i = 0; i < 5; i++){
         printf("%d. %s: %d \n", i+1, Material[i], hargaMaterial[i]);
@@ -72,11 +64,13 @@ void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek,
     
     nomor--;
     int totalHarga = jmlh*hargaMaterial[nomor];
-    *tempmat[0] = nomor;
-    *tempmat[1] = jmlh;
-    *tempmat[2] = totalHarga;
+    tempmat[*counter][0] = nomor;
+    tempmat[*counter][1] = jmlh;
+    tempmat[*counter][2] = totalHarga;
+    *counter ++;
 
-    printf("Apakah Anda yakin ingin membeli %d buah %s dengan total harga %d? (y/n)", jmlh, Material[nomor], totalHarga);
+    printf("Apakah Anda yakin ingin membeli %d buah %s dengan total harga %d? (y/n) ", jmlh, Material[nomor], totalHarga);
+    printf("\n");
     Kata Y,y,Yes,yes,Input;
     Y.TabKata[0]='Y'; Y.Length = 1;
     y.TabKata[0]='y'; Y.Length = 1;
@@ -90,10 +84,9 @@ void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek,
         }
         else{
             *TempUang -= totalHarga;
-
-            Kata execBuy;
-            execBuy.TabKata[0] = 'e'; execBuy.TabKata[1] = 'x'; execBuy.TabKata[2] = 'e'; execBuy.TabKata[3] = 'c'; execBuy.TabKata[4] = 'B'; execBuy.TabKata[5] = 'u'; execBuy.TabKata[6] = 'y'; execBuy.Length = 7;
-            Push(&stek, execBuy);
+            Kata KataBuy;
+            KataBuy.TabKata[0] = 'b'; KataBuy.TabKata[1] = 'u'; KataBuy.TabKata[2] = 'y'; KataBuy.Length=3;
+            Push(stek, KataBuy);
 
         }
         

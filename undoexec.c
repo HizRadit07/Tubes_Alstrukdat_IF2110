@@ -1,9 +1,6 @@
 #include "stackt.h"
-#include "stackt.c"
 #include "mesinkar.h"
 #include "mesinkata.h"
-#include "mesinkar.c"
-#include "mesinkata.c"
 
 void execute(Stack S, Kata build, Kata up, Kata buy, boolean prepPhase)
 {
@@ -18,21 +15,23 @@ void execute(Stack S, Kata build, Kata up, Kata buy, boolean prepPhase)
         while (!IsEmpty(S1)){
             Pop(&S1, &X);
             // X itu command buy, build, undo or upgrade.
-            if (IsKatasama(X, build))
+            if (IsKataSama(X, build))
             {
                 //command yg buat ngerjain build ngapain gitu//
             }
-            else if (IsKatasama(X, up))
+            else if (IsKataSama(X, up))
             {
                 //command yg buat ngerjain up ngapain gitu//
             }
             else if (IsKataSama(X, buy))
-            {
+            {   
                 // Buy
-                // buy(int Money, char Material[12][20], int hargaMaterial[12], int TempMoney)
+                // eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[10][3], int *counter
+                // --
                 
             }
         }
+        // moneyTemp = Uang;
     }
     else{
         printf("Anda berada di main phase");
