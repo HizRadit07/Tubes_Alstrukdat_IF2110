@@ -135,7 +135,11 @@ void STARTKATAWahana(char *file, char cc)
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 {
+<<<<<<< HEAD
     STARTWahana(file);
+=======
+    STARTWahana(&file);
+>>>>>>> 68387c42b42d87b2310c028ba891c2f033a7e556
     IgnoreBlankW(cc);
     if (CC==MARK){
         EndKata=true;
