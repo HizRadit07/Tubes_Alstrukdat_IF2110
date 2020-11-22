@@ -9,7 +9,8 @@
 #include "matriks.h"
 #include "point.h"
 #include "stackt.h"
-
+#ifndef buy_material
+#define buy_material
 // Harusnya dri eksternal file, tapi masih on progress
 
 // char material[5][20] = {
@@ -31,7 +32,7 @@
 
 
     
-void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[10][3], int *counter) {
+void eksekusiBuyy(int *uanglobal, int inventory[5], Jam *sisaWaktu, int tempmat[10][3], int *counter) {
     int indexMaterial = tempmat[*counter][0];
     int jmlhMaterial = tempmat[*counter][1];
     int totalHarga = tempmat[*counter][2];
@@ -43,7 +44,7 @@ void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[
         int detikSisa = JamToDetik(*sisaWaktu) - detikDibutuhkan;
         *sisaWaktu = DetikToJam(detikSisa);
         *uanglobal -= totalHarga;
-        *inventory[indexMaterial] += jmlhMaterial;
+        inventory[indexMaterial] += jmlhMaterial;
 
     }
     else 
@@ -51,7 +52,7 @@ void eksekusiBuy(int *uanglobal, int *inventory[5], Jam *sisaWaktu, int tempmat[
 
 }
 
-void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek, int *tempmat[10][3], int *counter) {
+void buyy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek, int tempmat[10][3], int *counter) {
     printf("Daftar Harga Material\n");
     for (int i = 0; i < 5; i++){
         printf("%d. %s: %d \n", i+1, Material[i], hargaMaterial[i]);
@@ -100,3 +101,4 @@ void buy(int *TempUang, char Material[5][20], int hargaMaterial[5], Stack *stek,
 // }
 
 
+#endif

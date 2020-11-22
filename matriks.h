@@ -82,8 +82,6 @@ void TulisMATRIKS (MATRIKS M);
 int NBElmt (MATRIKS M);
 /* Mengirimkan banyaknya elemen M */
 
-/* ********** KELOMPOK TEST TERHADAP MATRIKS ********** */
 
-POINT cariPoint (MATRIKS M, char Z);
 
 #endif

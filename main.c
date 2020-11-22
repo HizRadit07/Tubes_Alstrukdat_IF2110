@@ -17,6 +17,8 @@
 #include "stackt.c"
 #include "undoexec.c"
 #include "buy_material.c"
+#include "build.h"
+#include "build.c"
 /*#include "office.c"*/
 
 void mainPhase(Stack *S, Jam *J, boolean prepPhase){
@@ -210,6 +212,16 @@ while (!IsKataSama(input,KataEXIT))
             else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
+                if (mapstatus==1){
+                    build(prepPhase, M1);
+                }else if (mapstatus==2){    
+                    build(prepPhase, M2);
+                }else if (mapstatus==3){
+                    build(prepPhase, M3);
+                }else if (mapstatus==1){
+                    build(prepPhase, M4);
+                    
+                }
             }
             else if(IsKataSama(command,KataUpgrade)){
                 //command yg buat build ngapain gitu//
@@ -225,7 +237,7 @@ while (!IsKataSama(input,KataEXIT))
             }
             
             else if (IsKataSama(command, KataBuy)) {
-                buy(&tempMoney, Maaterial, HargaaMaterial, &Prep, &tempMaterial, &jmlhStack);
+                buyy(&tempMoney, Maaterial, HargaaMaterial, &Prep, tempMaterial, &jmlhStack);
             }
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/

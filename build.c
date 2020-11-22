@@ -7,18 +7,9 @@
 #include "matriks.c"
 #include "point.c"
 #include "point.h"
+#include "build.h"
 
 
-int inventorytemp[5]= {
-    20, //Pasir
-    20, //Besi
-    20, //Kaca
-    20, //Pintu
-    20  // Kayu
-
-};
-
-int uangtemp = 10000;
 
 
 
@@ -36,20 +27,18 @@ loadWahana(&W);
 int inventory_material_wahana[5];
 
     
-    Kata nama = W.namaWahana;
-    Kata bentuk = W.bentuk;
-    char charBentuk = scanf("%s", &bentuk);
-    printf("%s", charBentuk);
-    
-    int biayaBuild = W.BiayaBuild;
-    int biayaUpgrade = W.BiayaUpgrade;
-    int waktuBuild = W.waktuBuild;
-    int waktuUpgrade = W.waktuUpgrade;
-    inventory_material_wahana[1] = W.pasir;
-    inventory_material_wahana[2] = W.besi;
-    inventory_material_wahana[3] = W.kaca;
-    inventory_material_wahana[4] = W.pintu;
-    inventory_material_wahana[5] = W.kayu;
+Kata nama = W.namaWahana;
+Kata bentuk = W.bentuk;
+char bentukW = '@';
+int biayaBuild = W.BiayaBuild;
+int biayaUpgrade = W.BiayaUpgrade;
+int waktuBuild = W.waktuBuild;
+int waktuUpgrade = W.waktuUpgrade;
+inventory_material_wahana[1] = W.pasir;
+inventory_material_wahana[2] = W.besi;
+inventory_material_wahana[3] = W.kaca;
+inventory_material_wahana[4] = W.pintu;
+inventory_material_wahana[5] = W.kayu;
 
 int i = 0;
 
@@ -87,7 +76,7 @@ if (check){
     TulisPOINT(Player);
 
     printf("\n");
-    Elmt(M, Absis(Player), Ordinat(Player)) = charBentuk;
+    Elmt(M, Absis(Player), Ordinat(Player)) = bentukW;
    
     if (Elmt(M,Absis(Player)-1, Ordinat(Player) ) == '-'){
         Elmt(M,Absis(Player)-1, Ordinat(Player) ) = 'P';
@@ -178,3 +167,5 @@ int main(){
 
     return 0;
 }
+
+

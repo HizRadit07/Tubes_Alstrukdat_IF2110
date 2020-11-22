@@ -136,7 +136,7 @@ void STARTKATAWahana(char *file, char cc)
           CC karakter pertama sesudah karakter terakhir kata */
 {
     STARTWahana(file);
-    IgnoreBlank(cc);
+    IgnoreBlankW(cc);
     if (CC==MARK){
         EndKata=true;
     }
