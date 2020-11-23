@@ -5,7 +5,6 @@
 #include "boolean.h"
 #include "point.h"
 
-
 int inventorytemp[5]= {
     20, //Pasir
     20, //Besi

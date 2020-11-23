@@ -6,8 +6,6 @@
 #include "mesinkar.c"
 #include "mesinkata.h"
 
-
-
 void loadWahana(Wahana *W){
 
     char separator = ' ';

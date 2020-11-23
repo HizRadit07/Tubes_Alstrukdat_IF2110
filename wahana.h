@@ -1,12 +1,10 @@
 #ifndef wahana_H
 #define wahana_H
-
 #include "mesinkata.h"
 #include "mesinkata.c"
 #include "mesinkar.h"
 #include "jam.h"
 #include "point.h"
-
 
 typedef struct twahana * address_w;
 typedef struct twahana {

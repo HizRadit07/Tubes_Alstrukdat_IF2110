@@ -43,7 +43,6 @@ boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
     return ((i >= GetFirstIdxBrs(M) && i <= GetLastIdxBrs(M)) && (j >= GetFirstIdxKol(M) && j <= GetLastIdxKol(M)));
 }
 
-
 /* ********** KELOMPOK BACA/TULIS ********** */ 
 void BacaMATRIKS (MATRIKS * M, int NB, int NK, char filename[30]){
     FILE *pf;

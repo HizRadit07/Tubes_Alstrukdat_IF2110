@@ -155,6 +155,7 @@ if (filematerial)
         }
     }
 } // End:  while fgets
+
 fclose(filematerial);
 
 /*inisialisasi stack*/
