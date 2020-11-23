@@ -6,6 +6,7 @@
 #include "point.h"
 
 
+
 int inventorytemp[5]= {
     20, //Pasir
     20, //Besi
@@ -17,5 +18,5 @@ int inventorytemp[5]= {
 
 int uangtemp = 10000;
 
-void build(boolean prepPhase, MATRIKS M);
+
 #endif

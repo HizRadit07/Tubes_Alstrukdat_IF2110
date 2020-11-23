@@ -92,8 +92,6 @@ void Mirror (POINT *P, boolean SbX);
 /* F.S. P dicerminkan tergantung nilai SbX atau SbY */
 /* Jika SbX true maka dicerminkan terhadap sumbu X */
 /* Jika SbX false maka dicerminkan terhadap sumbu Y */
-void Putar (POINT *P, int Sudut);
-/* I.S. P terdefinisi */
-/* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) searah jarum jam*/
+
 
 #endif

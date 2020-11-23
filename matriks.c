@@ -95,8 +95,8 @@ int NBElmt (MATRIKS M){
 /* Mengirimkan banyaknya elemen M */
 
 
-boolean Jalan (MATRIKS M, indeks i, indeks j){
-    return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A' && Elmt(M, i, j) != '>' && Elmt(M, i, j) != '<' && Elmt(M, i, j) != '^' && Elmt(M, i, j) != 'V');
+boolean Jalan (MATRIKS M, indeks i, indeks j ){
+    return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A' && Elmt(M, i, j) != '>' && Elmt(M, i, j) != '<' && Elmt(M, i, j) != '^' && Elmt(M, i, j) != 'V'&& Elmt(M, i, j) != '@');
 }
 
 MATRIKS wasd (MATRIKS M, POINT P, Kata jalan){

@@ -18,8 +18,184 @@
 #include "undoexec.c"
 #include "buy_material.c"
 #include "build.h"
-#include "build.c"
+
+typedef struct twahana * address_w;
+typedef struct twahana {
+    Kata namaWahana;
+    Kata bentuk;
+    int BiayaBuild;
+    int BiayaUpgrade;
+    int waktuBuild;
+    int waktuUpgrade;
+    int pasir; //Pasir
+    int besi; //Besi
+    int kaca; //Kaca
+    int pintu; //Pintu
+    int kayu; //Kayu
+
+} Wahana;
+
 /*#include "office.c"*/
+void loadWahana(Wahana *W){
+
+    char separator = ' ';
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).namaWahana);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).bentuk);
+
+    ADVKATAW(separator);
+    (*W).BiayaBuild = ConvertKataW(CKata);
+    
+     ADVKATAW(separator);
+    (*W).BiayaUpgrade = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuBuild = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuUpgrade = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pasir = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).besi = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kaca = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pintu = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kayu = ConvertKataW(CKata);
+
+
+}
+
+void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal){
+//1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
+//2. Setelah pemain memilih wahana dasar yang ingin dibuat.
+//3. Jika resource untuk membangun wahana tidak mencukupi, maka akan ditampilkan pesan error.
+//4. Setelah itu, perintah eksekusi ini akan dimasukkan ke dalam stack.
+    if (prepPhase == true){
+
+    Wahana W;
+    WahanaSTART("wahana.txt");
+    loadWahana(&W);
+
+    int inventory_material_wahana[5];
+
+        
+    Kata nama = W.namaWahana;
+    Kata bentuk = W.bentuk;
+    int biayaBuild = W.BiayaBuild;
+    int biayaUpgrade = W.BiayaUpgrade;
+    int waktuBuild = W.waktuBuild;
+    int waktuUpgrade = W.waktuUpgrade;
+
+    int detikAwal = JamToDetik(*JGlobal);
+    *JGlobal = DetikToJam(detikAwal + (3600*waktuBuild));
+    TulisJam(*JGlobal);
+    
+    inventory_material_wahana[1] = W.pasir;
+    inventory_material_wahana[2] = W.besi;
+    inventory_material_wahana[3] = W.kaca;
+    inventory_material_wahana[4] = W.pintu;
+    inventory_material_wahana[5] = W.kayu;
+
+    int i = 0;
+
+    boolean check;
+    printf("~ Wahana yang akan dibangun ~\n");
+    printf("Nama Wahana : %s\n", nama);
+    printf("Biaya untuk membangun : %d\n",  biayaBuild);
+    printf("Lama waktu untuk membangun : %d\n", waktuBuild);
+    char bentukWahana;
+    printf("Masukan bentuk wahana (char) : \n");
+    scanf("%c", &bentukWahana);
+    printf("\n");
+
+
+    for (i = 0; i < 5; i++){
+        if (inventorytemp[i] >= inventory_material_wahana[i] ){
+            check = true;
+            inventorytemp[i] = inventorytemp[i] - inventory_material_wahana[i];
+            
+            
+        }else{
+            check = false;
+
+        }
+    }
+
+    if (check){
+        
+        uangtemp = uangtemp - biayaBuild;
+        if (uangtemp > 0){
+        printf("building...\n");
+        POINT Player = cariPoint(*M, 'P');
+        
+        TulisMATRIKS(*M);
+        TulisPOINT(Player);
+
+        
+        Elmt(*M, Absis(Player), Ordinat(Player)) = bentukWahana;
+        printf("\n");
+        
+    
+        if (Elmt(*M,Absis(Player)-1, Ordinat(Player) ) == '-'){
+            Elmt(*M,Absis(Player)-1, Ordinat(Player) ) = 'P';
+            Ordinat(Player)++;
+            
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player)-1 ) == '-'){
+            Elmt(*M,Absis(Player), Ordinat(Player)-1 ) = 'P';
+            Absis(Player)--;
+            
+        }else if (Elmt(*M,Absis(Player)+1, Ordinat(Player) ) == '-'){
+            Elmt(*M,Absis(Player)+1, Ordinat(Player) ) = 'P';
+            Ordinat(Player)--;
+        
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player) +1 ) == '-'){
+            Elmt(*M,Absis(Player), Ordinat(Player) +1 ) = 'P';
+            Absis(Player)++;
+
+        }else
+        {
+            printf("error, posisi wahana tidak memungkinkan untuk dibangun\n");
+        }
+        
+        TulisMATRIKS(*M);
+
+        printf("\n");
+        printf("Sisa Inventory anda :\n");
+        printf("Pasir : %d\n", inventorytemp[0]);
+        printf("Besi : %d\n", inventorytemp[1]);
+        printf("Kaca : %d\n", inventorytemp[2]);
+        printf("Pintu : %d\n", inventorytemp[3]);
+        printf("Kayu : %d\n", inventorytemp[4]);
+        printf("\n");
+        printf("Sisa Uang anda :\n");
+        printf("%d\n", uangtemp);}
+        else
+        {
+            printf("error, material kurang\n");
+        }
+        
+
+    }else{
+        printf("error, material kurang\n");
+    }
+    }else{
+
+        printf("Anda berada di main phase\n");
+    }
+    
+    
+}
 
 void mainPhase(Stack *S, Jam *J, boolean prepPhase){
     infotype X;
@@ -212,16 +388,17 @@ while (!IsKataSama(input,KataEXIT))
             else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
-                if (mapstatus==1){
-                    build(prepPhase, M1);
+               if (mapstatus==1){
+                    build(prepPhase, &M1, &JGlobal);
                 }else if (mapstatus==2){    
-                    build(prepPhase, M2);
+                    build(prepPhase, &M2, &JGlobal);
                 }else if (mapstatus==3){
-                    build(prepPhase, M3);
+                    build(prepPhase, &M3, &JGlobal);
                 }else if (mapstatus==1){
-                    build(prepPhase, M4);
+                    build(prepPhase, &M4, &JGlobal);
                     
                 }
+               
             }
             else if(IsKataSama(command,KataUpgrade)){
                 //command yg buat build ngapain gitu//

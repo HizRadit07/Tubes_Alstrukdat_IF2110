@@ -55,14 +55,4 @@ void PrintKata (Kata K);
 void InputUser(Kata *K);
 /* I.S. Sembarang */
 /* F.S. menginput masukan kata dari user dan menyimpannya di K */
-void IgnoreBlankW(char cc);
-void STARTKATAWahana(char *file, char cc);
-void ADVKATAW(char cc);
-void CopyKataW(Kata in, Kata * out);
-int ConvertKataW(Kata in);
-int ConvertKataChar(Kata in);
-void SalinKataW(char cc);
-boolean IsKataSamaW(Kata K1,Kata K2);
-void PrintKataW (Kata K);
-void InputUserW(Kata *K);
 #endif

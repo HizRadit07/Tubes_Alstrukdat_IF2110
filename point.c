@@ -200,15 +200,3 @@ void Mirror(POINT *P, boolean SbX)
         Absis(*P) = -Absis(*P);
     }
 }
-void Putar(POINT *P, int Sudut)
-{
-    /* I.S. P terdefinisi */
-    /* F.S. P digeser sebesar Sudut derajat dengan sumbu titik (0,0) searah jarum jam*/
-    int deg;
-    int x, y;
-    deg = Sudut * M_PI / (180.0);
-    x = Absis(*P) * cosf(deg) - Ordinat(*P) * sinf(deg);
-    y = Absis(*P) * sinf(deg) + Ordinat(*P) * cosf(deg);
-    Absis(*P) = x;
-    Ordinat(*P) = y;
-}
