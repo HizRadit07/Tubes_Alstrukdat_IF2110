@@ -16,7 +16,6 @@ int inventorytemp[5]= {
 
 };
 
-int uangtemp = 10000;
 
 
 #endif

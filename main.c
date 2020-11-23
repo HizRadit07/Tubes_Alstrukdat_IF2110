@@ -76,7 +76,7 @@ void loadWahana(Wahana *W){
 
 }
 
-void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal){
+void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
 //1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
 //2. Setelah pemain memilih wahana dasar yang ingin dibuat.
 //3. Jika resource untuk membangun wahana tidak mencukupi, maka akan ditampilkan pesan error.
@@ -134,8 +134,8 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal){
 
     if (check){
         
-        uangtemp = uangtemp - biayaBuild;
-        if (uangtemp > 0){
+        *tempMoney = *tempMoney - biayaBuild;
+        if (*tempMoney > 0){
         printf("building...\n");
         POINT Player = cariPoint(*M, 'P');
         
@@ -179,7 +179,7 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal){
         printf("Kayu : %d\n", inventorytemp[4]);
         printf("\n");
         printf("Sisa Uang anda :\n");
-        printf("%d\n", uangtemp);}
+        printf("%d\n", *tempMoney);}
         else
         {
             printf("error, material kurang\n");
@@ -346,7 +346,7 @@ while (!IsKataSama(input,KataEXIT))
         printf("Masukkan Username : ");
         fgets(nama, 100, stdin);
         printf(nama);
-        int money = 1000;
+        int money = 20000;
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
         /*inisialisasi semua elemen map*/
@@ -389,13 +389,13 @@ while (!IsKataSama(input,KataEXIT))
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
                if (mapstatus==1){
-                    build(prepPhase, &M1, &JGlobal);
+                    build(prepPhase, &M1, &JGlobal, &tempMoney);
                 }else if (mapstatus==2){    
-                    build(prepPhase, &M2, &JGlobal);
+                    build(prepPhase, &M2, &JGlobal, &tempMoney);
                 }else if (mapstatus==3){
-                    build(prepPhase, &M3, &JGlobal);
+                    build(prepPhase, &M3, &JGlobal, &tempMoney);
                 }else if (mapstatus==1){
-                    build(prepPhase, &M4, &JGlobal);
+                    build(prepPhase, &M4, &JGlobal, &tempMoney);
                     
                 }
                
