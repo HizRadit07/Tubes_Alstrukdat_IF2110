@@ -1,7 +1,6 @@
 #include "stackt.h"
 #include "mesinkar.h"
 #include "mesinkata.h"
-
 void execute(Stack S, Kata build, Kata up, Kata buy, boolean prepPhase)
 {
     Stack S1;

@@ -9,10 +9,6 @@
 #include "point.h"
 #include "build.h"
 
-
-
-
-
 void build(boolean prepPhase, MATRIKS M){
 //1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
 //2. Setelah pemain memilih wahana dasar yang ingin dibuat.
@@ -25,8 +21,7 @@ STARTWahana("wahana.txt");
 loadWahana(&W);
 
 int inventory_material_wahana[5];
-
-    
+  
 Kata nama = W.namaWahana;
 Kata bentuk = W.bentuk;
 char bentukW = '@';

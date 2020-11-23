@@ -1,0 +1,5 @@
+pasir/400
+besi/600
+kaca/100
+pintu/700
+kayu/200

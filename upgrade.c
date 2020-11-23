@@ -17,7 +17,6 @@ int inventory[5]= {
 };
 
 int uang = 10000;
-
 struct wahana {
 
     char bentuk[256];
