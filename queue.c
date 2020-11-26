@@ -1,110 +1,156 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "boolean.h"
+/* File : queue.c */
+/* Definisi ADT Queue dengan representasi array secara eksplisit dan alokasi dinamik */
+/* Model Implementasi Versi III dengan circular buffer */
+
 #include "queue.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 /* ********* Prototype ********* */
-boolean IsEmpty (Queue Q)
+int NBElmtQueue (Queue Q)
+/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong */
+{
+    int ret;
+    if ((Head(Q)==NilQ)&&(Tail(Q)==NilQ))
+    {
+        ret = 0;
+    }
+    else
+    {
+        ret = Tail(Q) - Head(Q) + 1;
+        if (ret <= 0)
+        {
+            ret = ret + MaxElQ(Q);
+        }
+    }
+    return ret;
+}
+
+boolean IsEmptyQueue (Queue Q)
 /* Mengirim true jika Q kosong: lihat definisi di atas */
 {
-    return ((Head(Q)==Nil) && (Tail(Q)==Nil));
+    return ((Head(Q) == NilQ) && (Tail(Q) == NilQ));
 }
-boolean IsFull (Queue Q)
+boolean IsFullQueue (Queue Q)
 /* Mengirim true jika tabel penampung elemen Q sudah penuh */
 /* yaitu mengandung elemen sebanyak MaxEl */
 {
-    return NBElmt(Q)==MaxEl(Q);
+    return (NBElmtQueue(Q) == MaxElQ(Q));
 }
-int NBElmt (Queue Q)
-/* Mengirimkan banyaknya elemen queue. Mengirimkan 0 jika Q kosong. */
-{
-    if (IsEmpty(Q)){
-        return 0;
-    }
-    else
-    {   
-      if (Head(Q) <= Tail(Q)){
-        return (Tail(Q) - Head(Q) + 1);
-        }
-    else{
-        return (MaxEl(Q) - Head(Q) + 1) + Tail(Q);
-        }
-    }
-    
-}
+
 /* *** Kreator *** */
-void MakeEmpty (Queue * Q, int Max)
+void CreateEmptyQueue (Queue * Q, int Max)
 /* I.S. sembarang */
 /* F.S. Sebuah Q kosong terbentuk dan salah satu kondisi sbb: */
-/* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max+1 */
+/* Jika alokasi berhasil, Tabel memori dialokasi berukuran Max */
 /* atau : jika alokasi gagal, Q kosong dg MaxEl=0 */
-/* Proses : Melakukan alokasi, membuat sebuah Q kosong */
+/* Proses : Melakukan alokasi,Membuat sebuah Q kosong */
 {
-    (*Q).T=(infotype *)malloc(Max*sizeof(infotype));
-    if ((*Q).T != NULL){
-        MaxEl(*Q) = Max;
-        Head(*Q) = Nil;
-        Tail(*Q) = Nil;
+    (*Q).T = (infotypeQ *) malloc ((Max + 1) * sizeof(infotypeQ));
+    if ((*Q).T == NULL)
+    {
+        MaxElQ(*Q) = NilQ;
     }
-    else{ //alokasi gagal//
-        MaxEl(*Q) = 0;
+    else
+    {
+        MaxElQ(*Q) = Max;
+        Head(*Q) = NilQ;
+        Tail(*Q) = NilQ;
     }
 }
 /* *** Destruktor *** */
-void DeAlokasi(Queue * Q)
+void DealokasiQueue (Queue * Q)
 /* Proses: Mengembalikan memori Q */
 /* I.S. Q pernah dialokasi */
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 {
-    MaxEl(*Q)=0;
+    MaxElQ(*Q) = NilQ;
     free((*Q).T);
 }
 /* *** Primitif Add/Delete *** */
-void Enqueue (Queue * Q, infotype X)
+void AddQueue (Queue * Q, infotypeQ X)
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 {
-    if (IsEmpty(*Q)){
-        Head(*Q)=0;
-        Tail(*Q)=0;
-        InfoHead(*Q)=X;
-    }
-    else{//Q tidak kosong}
-        if (Tail(*Q)==MaxEl(*Q)-1){
-            Tail(*Q)=0;
-            InfoTail(*Q)=X;
-        }
-        else{
-            Tail(*Q)++;
-            InfoTail(*Q)=X;
-        }
-    }
-}
-void Dequeue (Queue * Q, infotype * X)
-/* Proses: Menghapus X pada Q dengan aturan FIFO */
-/* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer; 
-        Q mungkin kosong */
-{
-    if (NBElmt(*Q)==1){
-        *X=InfoHead(*Q);
-        Head(*Q)=Nil;
-        Tail(*Q)=Nil;
+    if (IsEmptyQueue(*Q))
+    {
+        Head(*Q) = 1;
+        Tail(*Q) = 1;
+        InfoHead(*Q) = X;
     }
     else
     {
-        if (Head(*Q)==MaxEl(*Q)-1){
-            *X=InfoHead(*Q);
-            Head(*Q)=0;
-        }
-        else //head is not the last index
+        if (Tail(*Q) == MaxElQ(*Q))
         {
-            *X=InfoHead(*Q);
-            Head(*Q)++;
+            Tail(*Q) = 1;
         }
-        
+        else
+        {
+            Tail(*Q)++;
+        }
+        InfoTail(*Q) = X;
     }
-    
+
+}
+
+void DelQueue (Queue * Q, infotypeQ * X)
+/* Proses: Menghapus X pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
+        Q mungkin kosong */
+{
+    Queue Qt;
+    Qt = *Q;
+    infotypeQ y;
+    y = InfoHead(Qt);
+    *X = y;
+    if (NBElmtQueue(Qt) == 1)
+    {
+        Head(Qt) = NilQ;
+        Tail(Qt) = NilQ;
+    }
+    else
+    {
+        if (Head(Qt) == MaxElQ(Qt))
+        {
+            Head(Qt) = 1;
+        }
+        else
+        {
+            Head(Qt)++;
+        }
+    }
+    *Q = Qt;
+}
+
+void PrintQueue(Queue Q)
+/* I.S. Q sembarang */
+/* Isi queue dicetak ke layar */
+/* mendelete elemen sampai habis dan menuliskan semuanya ke layar */
+{
+    char c; int i; addressQ T = Tail(Q);
+    if(IsEmptyQueue(Q))
+    {
+		for(i=1; i<=MaxElQ(Q); ++i)
+		{
+			printf("_ ");
+		}
+	}
+    else
+    {
+		while (!IsEmptyQueue(Q))
+		{
+			DelQueue(&Q,&c);
+			printf("%c ",c);
+		}
+		
+		if(!IsFullQueue(Q)){
+			//printf("ini isi queue %c\n dan ini maxel %c",NBElmtQueue(Q),MaxElQ(Q));
+			for(i=(T + 1); i<=MaxElQ(Q); ++i)
+			{
+				printf("_ ");
+			}
+		}
+	}
 }
