@@ -11,7 +11,10 @@
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
-typedef char infotypeQ;
+typedef struct{ 
+        int PlayNum;
+        int Kesabaran;
+}infotypeQ;
 typedef int addressQ;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
@@ -66,9 +69,5 @@ void DelQueue (Queue * Q, infotypeQ * X);
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
 
-void PrintQueue(Queue Q);
-/* I.S. Q sembarang */
-/* Isi queue dicetak ke layar */
-/* mendelete elemen sampai habis dan menuliskan semuanya ke layar */
 
 #endif

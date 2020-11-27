@@ -123,34 +123,3 @@ void DelQueue (Queue * Q, infotypeQ * X)
     }
     *Q = Qt;
 }
-
-void PrintQueue(Queue Q)
-/* I.S. Q sembarang */
-/* Isi queue dicetak ke layar */
-/* mendelete elemen sampai habis dan menuliskan semuanya ke layar */
-{
-    char c; int i; addressQ T = Tail(Q);
-    if(IsEmptyQueue(Q))
-    {
-		for(i=1; i<=MaxElQ(Q); ++i)
-		{
-			printf("_ ");
-		}
-	}
-    else
-    {
-		while (!IsEmptyQueue(Q))
-		{
-			DelQueue(&Q,&c);
-			printf("%c ",c);
-		}
-		
-		if(!IsFullQueue(Q)){
-			//printf("ini isi queue %c\n dan ini maxel %c",NBElmtQueue(Q),MaxElQ(Q));
-			for(i=(T + 1); i<=MaxElQ(Q); ++i)
-			{
-				printf("_ ");
-			}
-		}
-	}
-}
