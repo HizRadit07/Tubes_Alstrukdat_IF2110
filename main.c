@@ -18,6 +18,8 @@
 #include "undoexec.c"
 #include "buy_material.c"
 #include "build.h"
+#include "queue.h"
+#include "queue.c"
 
 typedef struct twahana * address_w;
 typedef struct twahana {
@@ -230,7 +232,35 @@ void mainPhase(Stack *S, Jam *J, boolean prepPhase){
         printf("***Anda sudah berada di Main Phase.***\n");
     }
 }
-
+void GenerateQueue(Queue Q){
+//generate a queue with random numbers for the amount of times a visitor wants to play//
+    infotypeQ ElQ;
+    int num;
+    CreateEmptyQueue(&Q,5);
+    for (int i = 0; i < 5; i++)
+    {
+        ElQ.Kesabaran=10;
+        num=rand()%5;
+        ElQ.PlayNum=num;
+        AddQueue(&Q,ElQ);
+    }
+}
+void reduceKesabaran(Queue Q){
+//reduce kesabaran of all elmts of q//
+if (!IsEmptyQueue(Q)){
+        for (int i = 0; i < NBElmtQueue(Q); i++)
+        {
+            Q.T[i].Kesabaran=Q.T[i].Kesabaran-1;
+        }
+    }
+}
+void DelQueueAll(Queue Q){
+//empties all queue//
+    infotypeQ X;
+    for (int i=0;i<NBElmtQueue(Q);i++){
+        DelQueue(&Q,&X);
+    }
+}
 void print_title(){
 //prosedur menulis title card yaitu Willy Wangky's workd//
 printf(" __      __.__.__  .__           __      __                        __           /\\       __      __            .__       .___\n");
@@ -361,6 +391,8 @@ while (!IsKataSama(input,KataEXIT))
         int money = 20000;
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
+        /*inisialisasi queue*/
+        Queue Q1,Q2,Q3,Q4;
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
         boolean cekjalan = true;
@@ -532,6 +564,19 @@ while (!IsKataSama(input,KataEXIT))
                 JGlobal = DetikToJam(plus);
                 }
             }
+            if (JamToDetik(JGlobal)==3600*7){
+                GenerateQueue(Q1);
+                GenerateQueue(Q2);
+                GenerateQueue(Q3);
+                GenerateQueue(Q4);
+            }
+            if (JamToDetik(JGlobal)%60==0){
+                reduceKesabaran(Q1);
+                reduceKesabaran(Q2);
+                reduceKesabaran(Q3);
+                reduceKesabaran(Q4);
+            }
+            
         }
     }
     else

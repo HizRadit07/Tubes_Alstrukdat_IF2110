@@ -68,6 +68,4 @@ void DelQueue (Queue * Q, infotypeQ * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
         Q mungkin kosong */
-
-
 #endif
