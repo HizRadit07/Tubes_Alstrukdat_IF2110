@@ -22,7 +22,10 @@
 typedef struct twahana * address_w;
 typedef struct twahana {
     Kata namaWahana;
-    Kata bentuk;
+    int HargaWahana;
+    int KapasitasWahana;
+    int DurasiWahana;
+    Kata DeskripsiWahana;
     int BiayaBuild;
     int BiayaUpgrade;
     int waktuBuild;
@@ -44,7 +47,13 @@ void loadWahana(Wahana *W){
     CopyKataW(CKata, &(*W).namaWahana);
 
     ADVKATAW(separator);
-    CopyKataW(CKata, &(*W).bentuk);
+    (*W).HargaWahana = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).DurasiWahana = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).DeskripsiWahana);
 
     ADVKATAW(separator);
     (*W).BiayaBuild = ConvertKataW(CKata);
@@ -91,7 +100,10 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
 
         
     Kata nama = W.namaWahana;
-    Kata bentuk = W.bentuk;
+    int hargaWahana = W.HargaWahana;
+    int kapasitasWahana = W.KapasitasWahana;
+    int durasiWahana = W.DurasiWahana;
+    Kata deskripsi = W.DeskripsiWahana;
     int biayaBuild = W.BiayaBuild;
     int biayaUpgrade = W.BiayaUpgrade;
     int waktuBuild = W.waktuBuild;

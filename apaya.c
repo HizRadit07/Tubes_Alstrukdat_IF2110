@@ -75,10 +75,11 @@ int main(void)
             //  Skip over the separator
             ++p;
             strcpy(value_text, p);
+
             strncpy(key_text, text_read, key_length);
             key_text[key_length] = '\0';
-
             strcpy(Material[counter],key_text);
+            
             hargaMaterial[counter] = atoi(value_text);
             printf("Nama Material: %s -- Harga: %d\n", Material[counter], hargaMaterial[counter]);
             counter++;

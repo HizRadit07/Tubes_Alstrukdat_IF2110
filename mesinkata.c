@@ -148,6 +148,20 @@ void STARTKATAWahana(char *file, char cc)
     
 }
 
+void WahanaKataSTART(char * namafile){
+	WahanaSTART(namafile);
+	IgnoreBlank();
+	if (CC == MARK)
+		EndKata = true;
+	else {
+		EndKata = false;
+		SalinKata();
+		IgnoreBlank();
+		if (CC == MARK)
+			EndKata = true;
+	}
+}
+
 void ADVKATAW(char cc)
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi 
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi, 

@@ -23,7 +23,7 @@ Infotype GetAkar(BinTree P){
     return Akar(P);
 }
 
-BinTree Pree (Infotype X , BinTree L ,BinTree R ){
+BinTree tree (Infotype X , BinTree L ,BinTree R ){
     
 
          address P;
@@ -36,7 +36,13 @@ BinTree Pree (Infotype X , BinTree L ,BinTree R ){
         return P;
 }
 
-void MakeTree (Infotype X, BinTree L , BinTree R ,BinTree *P ){
+void MakeTree (Infotype X, BinTree L , BinTree R ,BinTree *P )
+/*{ I.S. Sembarang }
+{ F.S. Menghasilkan sebuah pohon P }
+{ Menghasilkan sebuah pohon biner P dari A, L, dan R, jika alokasi berhasil }
+{ Menghasilkan pohon P yang kosong (Nil) jika alokasi gagal }
+*/
+{
     *P = Alokasi(X);
     if (P != Nil){
         Left(*P) = L;

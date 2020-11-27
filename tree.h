@@ -37,7 +37,7 @@ void Dealokasi (address P);
 
 Infotype GetAkar(address P);
 
-BinTree Pree (Infotype X , BinTree L ,BinTree R );
+BinTree Tree (Infotype X , BinTree L ,BinTree R );
 
 void MakeTree (Infotype X, BinTree L , BinTree R ,BinTree *P );
 
