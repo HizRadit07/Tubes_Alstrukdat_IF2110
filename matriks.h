@@ -4,6 +4,7 @@
 #define MATRIKS_H
 
 #include "boolean.h"
+#include "string.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define BrsMin 0

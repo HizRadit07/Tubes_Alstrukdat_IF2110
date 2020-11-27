@@ -41,7 +41,7 @@ void SalinKataFile() { //SALINKATA
 
     
 
-    char EOL = '\n';
+   /* char EOL = '\n';
     
  
     int i;
@@ -62,7 +62,18 @@ void SalinKataFile() { //SALINKATA
     
 
 
-    CKata.Length = i;
+    CKata.Length = i; */
+
+    int i = 1;
+	boolean STOP;
+	do {
+		CKata.TabKata[i] = CC;
+		ADV();
+		STOP = ((CC == MARK) || (CC == BLANK) || (i == NMax));
+		if (!STOP)
+			i++;
+	} while (!STOP);
+	CKata.Length = i;
 
  
 
@@ -189,30 +200,16 @@ int main()
     */
 
 
-   WahanaKataSTART("test.txt"); //STARTKATA
-   WahanaSTART("test.txt"); //START
-
-    Kata nama_wahana[2];
-    int i = 0;
-    
-    while (!EOP)
-  {
-      WahanaADVKATA();
-      nama_wahana[i] = CKata;
-      WahanaADVKATA();
-      i++;
-      
-      
-  }
-  
-
-   for (int i = 0; i < 2; i++){
-       WahanaADVKATA();
-	    printf("%c", nama_wahana[i]);
+   WahanaSTART("test.txt");
+    while (!EndKata){
+        for (int i = 1; i <= CKata.Length; i++)
+			printf("%c", CKata.TabKata[i]);
 		printf("\n");
         WahanaADVKATA();
-   }
- 
+    }
+	for (int i = 1; i <= CKata.Length; i++)
+		printf("%c", CKata.TabKata[i]);
+	printf("\n");
 
 //wahana.txt nama-apa-apa
 //kata array_wahana[5]

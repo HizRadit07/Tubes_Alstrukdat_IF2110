@@ -166,7 +166,31 @@ POINT cariPoint (MATRIKS M, char Z){
 }
 
 
+boolean checkSekitar (MATRIKS *M){
+
+    POINT Player = cariPoint(*M, 'P');
+
+     if (Elmt(*M,Absis(Player)-1, Ordinat(Player) ) == 'W'){
+            return true;
+            
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player)-1 ) == 'W'){
+            return true;
+            
+        }else if (Elmt(*M,Absis(Player)+1, Ordinat(Player) ) == 'W'){
+            return true;
+        
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player) +1 ) == 'W'){
+            return false;
+        }else
+        {
+            return false;
+        }
 
 
+
+}
+
+
+ 
 
 
