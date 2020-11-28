@@ -1,3 +1,3 @@
-KomediPutar 500 102 Menyenangkan 1000 500 3 2 10 10 5 5 5
+KomediPutar Anak 500 2 Menyenangkan 1000 500 3 2 10 10 5 5 5 100 20 AnjayaniCoaster Dewasa 500 1 Menegangkan 1000 500 3 2 10 10 5 5 5 150 10 ArungJeram Air 500 1 Basah-basahan 1000 500 3 2 10 10 5 5 5 200 8 CrazyTornado Dewasa 500 1 pusingg 1000 500 3 2 10 10 5 5 5 200 15
 
 

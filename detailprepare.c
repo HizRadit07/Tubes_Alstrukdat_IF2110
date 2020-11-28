@@ -8,17 +8,22 @@
 #include "boolean.h"
 #include "point.h"
 
+
+//
+
 void detail(POINT posisi){
     //posisi player dimana?
     //disebelahnya ada wahana
-    //lah ngecek disampingnya ada wahana apanya juga gimana wkwkwk
+    if(checkSekitar(&Map, posisi)){
+
+    }//lah ngecek disampingnya ada wahana apanya juga gimana wkwkwk
     //baca data wahana itu
-    //cara baca datanya gimana cuy wkwkwk
+     //cara baca datanya gimana cuy wkwkwk
 }
 
 void prepare(Queue Q, Jam *JamDunia)
 {
-    //Mengosongkan antrian pengunjung dan langsung memulai ​preparation phase​
+    //Mengosongkan anrian pengunjung dan langsung memulai ​preparation phase​
     DelQueueAll(Q); //ini fungsi buat ngebuang isi Q kan? Qnya masukin antrian pengunjung
     Hour(*JamDunia) = 15;
 }

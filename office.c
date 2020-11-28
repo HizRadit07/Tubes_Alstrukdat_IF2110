@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mesinkata.h"
-void office(int mapstatus){
-    if (mapstatus==2){
+void office(int *mapstatus){
+    if (*mapstatus==2){
         for (int i = 0; i < len(arr), i++){
             printf("Selamat datang di office\n ");
             printf("Detail wahana :");

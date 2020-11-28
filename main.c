@@ -20,74 +20,408 @@
 #include "build.h"
 #include "queue.h"
 #include "queue.c"
+#include "wahanaRusak.c"
 
 typedef struct twahana * address_w;
 typedef struct twahana {
-    Kata namaWahana;
-    int HargaWahana;
-    int KapasitasWahana;
-    int DurasiWahana;
-    Kata DeskripsiWahana;
-    int BiayaBuild;
-    int BiayaUpgrade;
-    int waktuBuild;
-    int waktuUpgrade;
-    int pasir; //Pasir
-    int besi; //Besi
-    int kaca; //Kaca
-    int pintu; //Pintu
-    int kayu; //Kayu
+    Kata namaWahana1;
+    Kata TipeWahana1;
+    int HargaWahana1;
+    Kata DeskripsiWahana1;
+    int KapasitasWahana1;
+    int DurasiWahana1;
+    int CostWah1;
+    int BiayaUpgrade1;
+    int waktuBuild1;
+    int waktuUpgrade1;
+    int pasir1; //Pasir
+    int besi1; //Besi
+    int kaca1; //Kaca
+    int pintu1; //Pintu
+    int kayu1; //Kayu
+    int hargaTiket1; 
 
+    Kata namaWahana2;
+    Kata TipeWahana2;
+    int HargaWahana2;
+    Kata DeskripsiWahana2;
+    int KapasitasWahana2;
+    int DurasiWahana2;
+    int CostWah2;
+    int BiayaUpgrade2;
+    int waktuBuild2;
+    int waktuUpgrade2;
+    int pasir2; //Pasir
+    int besi2; //Besi
+    int kaca2; //Kaca
+    int pintu2; //Pintu
+    int kayu2; //Kayu
+    int hargaTiket2; 
+
+    Kata namaWahana3;
+    Kata TipeWahana3;
+    int HargaWahana3;
+    Kata DeskripsiWahana3;
+    int KapasitasWahana3;
+    int DurasiWahana3;
+    int CostWah3;
+    int BiayaUpgrade3;
+    int waktuBuild3;
+    int waktuUpgrade3;
+    int pasir3; //Pasir
+    int besi3; //Besi
+    int kaca3; //Kaca
+    int pintu3; //Pintu
+    int kayu3; //Kayu
+    int hargaTiket3; 
+
+    Kata namaWahana4;
+    Kata TipeWahana4;
+    int HargaWahana4;
+    Kata DeskripsiWahana4;
+    int KapasitasWahana4;
+    int DurasiWahana4;
+    int CostWah4;
+    int BiayaUpgrade4;
+    int waktuBuild4;
+    int waktuUpgrade4;
+    int pasir4; //Pasir
+    int besi4; //Besi
+    int kaca4; //Kaca
+    int pintu4; //Pintu
+    int kayu4; //Kayu
+    int hargaTiket4; 
+
+    
 } Wahana;
+
+
 
 /*#include "office.c"*/
 void loadWahana(Wahana *W){
 
     char separator = ' ';
 
+    //Wahana 1
     ADVKATAW(separator);
-    CopyKataW(CKata, &(*W).namaWahana);
+    CopyKataW(CKata, &(*W).namaWahana1);
 
     ADVKATAW(separator);
-    (*W).HargaWahana = ConvertKataW(CKata);
+    CopyKataW(CKata, &(*W).TipeWahana1);
 
     ADVKATAW(separator);
-    (*W).DurasiWahana = ConvertKataW(CKata);
+    (*W).HargaWahana1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    CopyKataW(CKata, &(*W).DeskripsiWahana);
+    (*W).DurasiWahana1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).BiayaBuild = ConvertKataW(CKata);
+    CopyKataW(CKata, &(*W).DeskripsiWahana1);
+
+    ADVKATAW(separator);
+    (*W).CostWah1 = ConvertKataW(CKata);
     
      ADVKATAW(separator);
-    (*W).BiayaUpgrade = ConvertKataW(CKata);
+    (*W).BiayaUpgrade1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).waktuBuild = ConvertKataW(CKata);
+    (*W).waktuBuild1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).waktuUpgrade = ConvertKataW(CKata);
+    (*W).waktuUpgrade1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).pasir = ConvertKataW(CKata);
+    (*W).pasir1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).besi = ConvertKataW(CKata);
+    (*W).besi1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).kaca = ConvertKataW(CKata);
+    (*W).kaca1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).pintu = ConvertKataW(CKata);
+    (*W).pintu1 = ConvertKataW(CKata);
 
     ADVKATAW(separator);
-    (*W).kayu = ConvertKataW(CKata);
+    (*W).kayu1 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).hargaTiket1 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).KapasitasWahana1 = ConvertKataW(CKata);
+
+    //Wahana 2
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).namaWahana2);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).TipeWahana2);
+
+    ADVKATAW(separator);
+    (*W).HargaWahana2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).DurasiWahana2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).DeskripsiWahana2);
+
+    ADVKATAW(separator);
+    (*W).CostWah2 = ConvertKataW(CKata);
+    
+     ADVKATAW(separator);
+    (*W).BiayaUpgrade2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuBuild2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuUpgrade2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pasir2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).besi2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kaca2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pintu2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kayu2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).hargaTiket2 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).KapasitasWahana2 = ConvertKataW(CKata);
+
+    //Wahana 3
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).namaWahana3);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).TipeWahana3);
+
+    ADVKATAW(separator);
+    (*W).HargaWahana3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).DurasiWahana3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).DeskripsiWahana3);
+
+    ADVKATAW(separator);
+    (*W).CostWah3 = ConvertKataW(CKata);
+    
+     ADVKATAW(separator);
+    (*W).BiayaUpgrade3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuBuild3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuUpgrade3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pasir3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).besi3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kaca3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pintu3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kayu3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).hargaTiket3 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).KapasitasWahana3 = ConvertKataW(CKata);
+
+    //Wahana 4
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).namaWahana4);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).TipeWahana4);
+
+    ADVKATAW(separator);
+    (*W).HargaWahana4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).DurasiWahana4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    CopyKataW(CKata, &(*W).DeskripsiWahana4);
+
+    ADVKATAW(separator);
+    (*W).CostWah4 = ConvertKataW(CKata);
+    
+     ADVKATAW(separator);
+    (*W).BiayaUpgrade4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuBuild4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).waktuUpgrade4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pasir4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).besi4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kaca4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).pintu4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).kayu4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).hargaTiket4 = ConvertKataW(CKata);
+
+    ADVKATAW(separator);
+    (*W).KapasitasWahana4 = ConvertKataW(CKata);
+
+    
 
 
 }
 
-void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
+void office(int *mapstatus, Wahana W){
+    if (*mapstatus==2){
+
+        
+        WahanaSTART("wahana.txt");
+        loadWahana(&W);
+        
+        Kata nameOfRides[4];
+        nameOfRides[0] = W.namaWahana1;
+        nameOfRides[1] = W.namaWahana2;
+        nameOfRides[2] = W.namaWahana3;
+        nameOfRides[3] = W.namaWahana4;
+
+        int hargaWahana[4];
+        hargaWahana[0] = W.HargaWahana1;
+        hargaWahana[1] = W.HargaWahana2;
+        hargaWahana[2] = W.HargaWahana3;
+        hargaWahana[3] = W.HargaWahana4;
+
+        //Kapasitas Wahana
+        int kapasitasWahana[4];
+        kapasitasWahana[0] = W.KapasitasWahana1; // 20
+        kapasitasWahana[1] = W.KapasitasWahana2; // 10
+        kapasitasWahana[2] = W.KapasitasWahana3; // 8
+        kapasitasWahana[3] = W.KapasitasWahana4; // 15
+
+        Kata deskripsi[4];
+        deskripsi[0] = W.DeskripsiWahana1;
+        deskripsi[1] = W.DeskripsiWahana2;
+        deskripsi[2] = W.DeskripsiWahana3;
+        deskripsi[3] = W.DeskripsiWahana4;
+
+        //Durasi Wahana
+        int durasiWahana[4];
+        durasiWahana[0] = W.DurasiWahana1;
+        durasiWahana[1] = W.DurasiWahana2;
+        durasiWahana[2] = W.DurasiWahana3;
+        durasiWahana[3] = W.DurasiWahana4;
+
+        //Tipe Wahana
+        Kata TypeWahana[4];
+        TypeWahana[0] = W.TipeWahana1;
+        TypeWahana[1] = W.TipeWahana2;
+        TypeWahana[2] = W.TipeWahana3;
+        TypeWahana[3] = W.TipeWahana4;
+
+        //Harga Tiket
+        int ticketPrice[4];
+        ticketPrice[0] = W.hargaTiket1;
+        ticketPrice[1] = W.hargaTiket2;
+        ticketPrice[2] = W.hargaTiket3;
+        ticketPrice[3] = W.hargaTiket4;
+
+
+
+        int counterHari[4]; //diisi dari data hasilserve 
+        counterHari[0] = 1;
+        counterHari[1] = 1;
+        counterHari[2] = 1;
+        counterHari[3] = 1;
+
+        int counterTotal[4]; //diisi dari data hasilserve 
+        counterTotal[0] += counterHari[0];
+        counterTotal[1] += counterHari[1];
+        counterTotal[2] += counterHari[2];
+        counterTotal[3] += counterHari[3];
+        
+
+        int penghasilanTotal[4];
+        penghasilanTotal[0] = ticketPrice[0]*counterTotal[0];
+        penghasilanTotal[1] = ticketPrice[1]*counterTotal[1];
+        penghasilanTotal[2] = ticketPrice[2]*counterTotal[2];
+        penghasilanTotal[3] = ticketPrice[3]*counterTotal[3];
+        
+        int penghasilanHari[4];
+        penghasilanHari[0] =  ticketPrice[0]*counterHari[0];
+        penghasilanHari[1] =  ticketPrice[1]*counterHari[1];
+        penghasilanHari[2] =  ticketPrice[2]*counterHari[2];
+        penghasilanHari[3] =  ticketPrice[3]*counterHari[3];
+
+
+        
+
+        for (int i = 0; i < 4; i++){
+            printf("Selamat datang di office\n ");
+            printf("Detail wahana :");
+            printf("  1. Nama Wahana : ");
+            PrintKataW(nameOfRides[i]);
+            printf("\n");
+            printf("  2. Tipe wahana\n");
+            PrintKataW(TypeWahana[i]);
+            printf("\n");
+            printf("  3. Harga wahana : ", hargaWahana[i]);
+            printf("\n");
+            printf("  4. Lokasi wahana : \n");
+            printf("  5. Deskripsi wahana :\n");
+            PrintKataW(deskripsi[i]);
+            printf("\n");
+            printf("  6. Kapasitas wahana : %d \n", kapasitasWahana[i]);
+            printf("  7. History Upgrade wahana : \n");
+            printf("  8. Durasi wahana : %d \n", durasiWahana[i]);
+            printf("  9. Ukuran wahana : \n");
+            printf("\n");
+            printf("Laporan wahana : ");
+            printf("  1. Berapakali wahana dinaiki : %d\n", counterTotal[i]);
+            printf("  2. Total penghasilan dari wahana : %d\n", penghasilanTotal[i]);
+            printf("  3. Berapa kali wahana dinaiki dalam hari ini : %d\n", counterHari[i]);
+            printf("  4. Total penghasilan dari wahana dalam hari ini : %d\n", penghasilanHari[i]);
+        }
+    }
+    else{
+        printf("***Anda tidak berada di Map 1***\n");
+    }
+}
+
+void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
 //1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
 //2. Setelah pemain memilih wahana dasar yang ingin dibuat.
 //3. Jika resource untuk membangun wahana tidak mencukupi, maka akan ditampilkan pesan error.
@@ -98,46 +432,139 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
     WahanaSTART("wahana.txt");
     loadWahana(&W);
 
-    int inventory_material_wahana[5];
+    
+    
 
-        
-    Kata nama = W.namaWahana;
-    int hargaWahana = W.HargaWahana;
-    int kapasitasWahana = W.KapasitasWahana;
-    int durasiWahana = W.DurasiWahana;
-    Kata deskripsi = W.DeskripsiWahana;
-    int biayaBuild = W.BiayaBuild;
-    int biayaUpgrade = W.BiayaUpgrade;
-    int waktuBuild = W.waktuBuild;
-    int waktuUpgrade = W.waktuUpgrade;
+    //Nama Wahana
+    Kata nameOfRides[4];
+    nameOfRides[0] = W.namaWahana1;
+    nameOfRides[1] = W.namaWahana2;
+    nameOfRides[2] = W.namaWahana3;
+    nameOfRides[3] = W.namaWahana4;
+
+    //Harga Wahana
+    int hargaWahana[4];
+    hargaWahana[0] = W.HargaWahana1;
+    hargaWahana[1] = W.HargaWahana2;
+    hargaWahana[2] = W.HargaWahana3;
+    hargaWahana[3] = W.HargaWahana4;
+
+    //Kapasitas Wahana
+    int kapasitasWahana[4];
+    kapasitasWahana[0] = W.KapasitasWahana1;
+    kapasitasWahana[1] = W.KapasitasWahana2;
+    kapasitasWahana[2] = W.KapasitasWahana3;
+    kapasitasWahana[3] = W.KapasitasWahana4;
+
+    //Durasi Wahana
+    int durasiWahana[4];
+    durasiWahana[0] = W.DurasiWahana1;
+    durasiWahana[1] = W.DurasiWahana2;
+    durasiWahana[2] = W.DurasiWahana3;
+    durasiWahana[3] = W.DurasiWahana4;
+
+    //Deskripsi Wahana
+    Kata deskripsi[4];
+    deskripsi[0] = W.DeskripsiWahana1;
+    deskripsi[1] = W.DeskripsiWahana2;
+    deskripsi[2] = W.DeskripsiWahana3;
+    deskripsi[3] = W.DeskripsiWahana4;
+
+    //biaya Build
+    int CostWah[4];
+    CostWah[0] = W.CostWah1;
+    CostWah[1] = W.CostWah2;
+    CostWah[2] = W.CostWah3;
+    CostWah[3] = W.CostWah4;
+
+    //Biaya Upgrade
+    int biayaUpgrade[4];
+    biayaUpgrade[0] = W.BiayaUpgrade1;
+    biayaUpgrade[1] = W.BiayaUpgrade2;
+    biayaUpgrade[2] = W.BiayaUpgrade3;
+    biayaUpgrade[3] = W.BiayaUpgrade4;
+
+    //Waktu Build
+    int waktuBuild[4];
+    waktuBuild[0] = W.waktuBuild1;
+    waktuBuild[1] = W.waktuBuild2;
+    waktuBuild[2] = W.waktuBuild3;
+    waktuBuild[3] = W.waktuBuild4;
+
+    //Waktu Upgrade  
+    int waktuUpgrade[4];
+    waktuUpgrade[0] = W.waktuUpgrade1;
+    waktuUpgrade[1] = W.waktuUpgrade2;
+    waktuUpgrade[2] = W.waktuUpgrade3;
+    waktuUpgrade[3] = W.waktuUpgrade4;
+
+    //material yang dibutuhkan untuk membangun
+    int requiredMat[4][5];
+    requiredMat[0][1] = W.pasir1;
+    requiredMat[0][2] = W.besi1;
+    requiredMat[0][3] = W.kaca1;
+    requiredMat[0][4] = W.pintu1;
+    requiredMat[0][5] = W.kayu1;
+
+    requiredMat[1][1] = W.pasir2;
+    requiredMat[1][2] = W.besi2;
+    requiredMat[1][3] = W.kaca2;
+    requiredMat[1][4] = W.pintu2;
+    requiredMat[1][5] = W.kayu2;
+    
+    requiredMat[2][1] = W.pasir3;
+    requiredMat[2][2] = W.besi3;
+    requiredMat[2][3] = W.kaca3;
+    requiredMat[2][4] = W.pintu3;
+    requiredMat[2][5] = W.kayu3;
+    
+    requiredMat[3][1] = W.pasir4;
+    requiredMat[3][2] = W.besi4;
+    requiredMat[3][3] = W.kaca4;
+    requiredMat[3][4] = W.pintu4;
+    requiredMat[3][5] = W.kayu4;
+
+    
+                for (int i = 0; i <4; i++){
+                    printf("%d.", i +1 );
+                    PrintKataW(nameOfRides[i]);
+                    printf("\n");
+                }
+                printf("\n");
+                int X;
+                scanf(" Pilih Wahana : %d\n", &X);
+
+                
+    
+    
+
+    
+
 
     int detikAwal = JamToDetik(*JGlobal);
-    *JGlobal = DetikToJam(detikAwal + (3600*waktuBuild));
+    *JGlobal = DetikToJam(detikAwal + (3600*waktuBuild[X-1]));
     TulisJam(*JGlobal);
     
-    inventory_material_wahana[1] = W.pasir;
-    inventory_material_wahana[2] = W.besi;
-    inventory_material_wahana[3] = W.kaca;
-    inventory_material_wahana[4] = W.pintu;
-    inventory_material_wahana[5] = W.kayu;
-
+    
     int i = 0;
 
     boolean check;
     printf("~ Wahana yang akan dibangun ~\n");
-    printf("Nama Wahana : %s\n", nama);
-    printf("Biaya untuk membangun : %d\n",  biayaBuild);
-    printf("Lama waktu untuk membangun : %d\n", waktuBuild);
-    char bentukWahana;
+    printf("Nama Wahana :");
+    PrintKataW(nameOfRides[X-1]);
+    printf("\n");
+    // printf("Nama Wahana : %s\n", nameOfRides[X-1]);
+    printf("Biaya untuk membangun : %d\n",  CostWah[X-1]);
+    printf("Lama waktu untuk membangun : %d\n", waktuBuild[X-1]);
+    char bentukWahana = 'W';
     printf("Masukan bentuk wahana (char) : \n");
-    scanf("%c", &bentukWahana);
     printf("\n");
 
 
     for (i = 0; i < 5; i++){
-        if (inventorytemp[i] >= inventory_material_wahana[i] ){
+        if (inventorytemp[i] >= requiredMat[X-1][i]){
             check = true;
-            inventorytemp[i] = inventorytemp[i] - inventory_material_wahana[i];
+            inventorytemp[i] = inventorytemp[i] - requiredMat[X-1][i];
             
             
         }else{
@@ -148,13 +575,11 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
 
     if (check){
         
-        *tempMoney = *tempMoney - biayaBuild;
+        *tempMoney = *tempMoney - CostWah[X];
         if (*tempMoney > 0){
         printf("building...\n");
         POINT Player = cariPoint(*M, 'P');
         
-        TulisMATRIKS(*M);
-        TulisPOINT(Player);
 
         
         Elmt(*M, Absis(Player), Ordinat(Player)) = bentukWahana;
@@ -182,7 +607,6 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
             printf("error, posisi wahana tidak memungkinkan untuk dibangun\n");
         }
         
-        TulisMATRIKS(*M);
 
         printf("\n");
         printf("Sisa Inventory anda :\n");
@@ -211,9 +635,9 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney ){
     
 }
 
-void mainPhase(Stack *S, Jam *J, boolean prepPhase){
+void mainPhase(Stack *S, Jam *J, boolean *prepPhase){
     infotype X;
-    if (prepPhase == true){
+    if (*prepPhase == true){
         while (!IsEmpty(*S)){
             if(Top(*S) != Nil){
                 Pop(S, &X);
@@ -222,7 +646,7 @@ void mainPhase(Stack *S, Jam *J, boolean prepPhase){
         Hour(*J) = 7;
         Minute(*J) = 0;
         Second(*J) = 0;
-        prepPhase = false;
+        *prepPhase = false;
         printf("Anda memasuki main phase\n");
         printf("Sekarang jam : ");
         TulisJam(*J);
@@ -316,6 +740,8 @@ D.TabKata[0]='D';D.Length=1;
 Kata d;
 d.TabKata[0]='d';d.Length=1;
 
+
+
 /*inisialisasi jam global*/
 Jam JGlobal=MakeJam(14,50,0);
 Jam JStart=MakeJam(7,0,0);
@@ -359,6 +785,10 @@ printf("\n");
 printf("Masukkan input: ");
 InputUser(&input);
 boolean prepPhase = true;
+boolean wahanarusak1 = false;
+boolean wahanarusak2 = false;
+boolean wahanarusak3 = false;
+boolean wahanarusak4 = false;
 while (!IsKataSama(input,KataEXIT))
 {   
     //opsi 1 untuk main menu//
@@ -402,6 +832,7 @@ while (!IsKataSama(input,KataEXIT))
         posisi=cariPoint(M2,'P');
         /*loop untuk jalan*/
         while (cekjalan){
+            
             printf("Halo ");
             printf(nama);
             printf("Uang anda : $ %d\n", money);
@@ -410,28 +841,55 @@ while (!IsKataSama(input,KataEXIT))
             printf("\n");
             printf("Masukkan command: ");
             InputUser(&command);
+            
             if (Hour(JGlobal) >= 15 || Hour(JGlobal) < 7){
                     prepPhase = true;
-                    printf("Ini prep phase\n");
+                    printf("\nIni prep phase\n");
             }
             if(Hour(JGlobal) < 15 && Hour(JGlobal) >= 7){
                 prepPhase = false;
-                printf("Ini main phase\n");
+                printf("\nIni main phase\n");
             }
+
+            wahanaRusak(&wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
+            if (wahanarusak1 == true){
+                printf("***Wahana di Map 1 rusak***\n");
+            }
+            if (wahanarusak2 == true){
+                printf("***Wahana di Map 2 rusak***\n");
+            }
+            if (wahanarusak3 == true){
+                printf("***Wahana di Map 3 rusak***\n");
+            }
+            if (wahanarusak4 == true){
+                printf("***Wahana di Map 4 rusak***\n");
+            }
+           
+
+
             if (IsKataSama(command,KataEXIT)){
                 cekjalan=false;
             }
+            else if (IsKataSama(command, KataRepair)){
+                repairwahana(mapstatus, &wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
+            }
             else if (IsKataSama(command, KataMAIN)){
-                mainPhase(&Prep, &JGlobal, prepPhase);
+                mainPhase(&Prep, &JGlobal, &prepPhase);
                 
             }
-            /*
-            else if (IsKataSama(command, KataOffice)){
+            
+            /*else if (IsKataSama(command, KataOffice)){
                 office(mapstatus);
-                */
+            }*/
             else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
+                
+                
+                
+
+
+                
                if (mapstatus==1){
                     build(prepPhase, &M1, &JGlobal, &tempMoney);
                 }else if (mapstatus==2){    
@@ -533,6 +991,7 @@ while (!IsKataSama(input,KataEXIT))
                     posisi=cariPoint(M3,'P');
                     mapstatus=3;
                 }
+                
                 
                 /*code for moving in the matrix*/
                 if (mapstatus==1){

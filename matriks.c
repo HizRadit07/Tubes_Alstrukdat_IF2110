@@ -6,6 +6,7 @@
 #include "point.h"
 #include "mesinkata.h"
 
+
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */              
 /* *** Konstruktor membentuk MATRIKS *** */
 void MakeMATRIKS (int NB, int NK, MATRIKS * M){
@@ -98,6 +99,19 @@ boolean Jalan (MATRIKS M, indeks i, indeks j ){
     return (Elmt(M, i, j) != 'W' && Elmt(M, i, j) != '*' && Elmt(M, i, j) != 'O' && Elmt(M, i, j) != 'A' && Elmt(M, i, j) != '>' && Elmt(M, i, j) != '<' && Elmt(M, i, j) != '^' && Elmt(M, i, j) != 'V'&& Elmt(M, i, j) != '@');
 }
 
+
+POINT cariPoint (MATRIKS M, char Z){
+    POINT P;
+    for (int i = 0; i < NBrsEff(M); i++){
+        for (int j = 0; j < NKolEff(M); j++){
+            if (Elmt(M, i, j) == Z){
+                P = MakePOINT(i, j);
+            }
+        }
+    }
+    return P;
+}
+
 MATRIKS wasd (MATRIKS M, POINT P, Kata jalan){
     Kata a;
     a.TabKata[0]='a';a.Length=1;
@@ -153,22 +167,7 @@ MATRIKS wasd (MATRIKS M, POINT P, Kata jalan){
     return M;
 }
 
-POINT cariPoint (MATRIKS M, char Z){
-    POINT P;
-    for (int i = 0; i < NBrsEff(M); i++){
-        for (int j = 0; j < NKolEff(M); j++){
-            if (Elmt(M, i, j) == Z){
-                P = MakePOINT(i, j);
-            }
-        }
-    }
-    return P;
-}
-
-
-boolean checkSekitar (MATRIKS *M){
-
-    POINT Player = cariPoint(*M, 'P');
+boolean checkSekitar (MATRIKS *M, POINT Player){
 
      if (Elmt(*M,Absis(Player)-1, Ordinat(Player) ) == 'W'){
             return true;
