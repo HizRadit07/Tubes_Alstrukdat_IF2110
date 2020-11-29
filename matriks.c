@@ -185,7 +185,25 @@ boolean checkSekitar (MATRIKS *M, POINT Player){
             return false;
         }
 
+}
 
+boolean checkSekitarAntrian (MATRIKS *M, POINT Player){
+
+     if (Elmt(*M,Absis(Player)-1, Ordinat(Player) ) == 'A'){
+            return true;
+            
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player)-1 ) == 'A'){
+            return true;
+            
+        }else if (Elmt(*M,Absis(Player)+1, Ordinat(Player) ) == 'A'){
+            return true;
+        
+        }else if (Elmt(*M,Absis(Player), Ordinat(Player) +1 ) == 'A'){
+            return false;
+        }else
+        {
+            return false;
+        }
 
 }
 

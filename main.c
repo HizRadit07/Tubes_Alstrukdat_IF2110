@@ -678,11 +678,13 @@ if (!IsEmptyQueue(Q)){
         }
     }
 }
-void DelQueueAll(Queue Q){
+void DelQueueAll(Queue *Q){
 //empties all queue//
     infotypeQ X;
-    for (int i=0;i<NBElmtQueue(Q);i++){
-        DelQueue(&Q,&X);
+    if (!IsEmptyQueue(*Q)){
+    for (int i=0;i<NBElmtQueue(*Q);i++){
+        DelQueue(Q,&X);
+    }
     }
 }
 void print_title(){
@@ -709,6 +711,8 @@ KataNew.TabKata[0]='n';KataNew.TabKata[1]='e';KataNew.TabKata[2]='w';KataNew.Len
 Kata input;
 Kata KataMAIN;
 KataMAIN.TabKata[0] = 'm'; KataMAIN.TabKata[1] = 'a'; KataMAIN.TabKata[2] = 'i'; KataMAIN.TabKata[3] = 'n'; KataMAIN.Length = 4;
+Kata KataPREP;
+KataPREP.TabKata[0] = 'p'; KataPREP.TabKata[1] = 'r'; KataPREP.TabKata[2] = 'e'; KataPREP.TabKata[3] = 'p'; KataPREP.Length=4;
 Kata KataOffice;
 KataOffice.TabKata[0]='o';KataOffice.TabKata[1]='f';KataOffice.TabKata[2]='f';KataOffice.TabKata[3]='i';KataOffice.TabKata[4]='c';KataOffice.TabKata[5]='e';KataOffice.Length=6;
 Kata KataRepair;
@@ -815,6 +819,9 @@ while (!IsKataSama(input,KataEXIT))
         int money = 20000;
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
+        /*declare queue*/
+        Queue Q1,Q2,Q3,Q4;
+
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
         boolean cekjalan = true;
@@ -845,7 +852,16 @@ while (!IsKataSama(input,KataEXIT))
             }
             else if (IsKataSama(command, KataMAIN)){
                 mainPhase(&Prep, &JGlobal, prepPhase);
-                
+                GenerateQueue(Q1);
+                prepPhase = false;
+            }
+            else if (IsKataSama(command,KataPREP)){
+                Hour(JGlobal)=15;
+                Minute(JGlobal)=0;
+                Second(JGlobal)=0;
+                prepPhase=true;
+                DelQueueAll(&Q1);
+                printf("Anda memasuki PrepPhase\n");
             }
             /*
             else if (IsKataSama(command, KataOffice)){
@@ -860,7 +876,7 @@ while (!IsKataSama(input,KataEXIT))
                     build(prepPhase, &M2, &JGlobal, &tempMoney);
                 }else if (mapstatus==3){
                     build(prepPhase, &M3, &JGlobal, &tempMoney);
-                }else if (mapstatus==1){
+                }else if (mapstatus==4){
                     build(prepPhase, &M4, &JGlobal, &tempMoney);
                     
                 }
