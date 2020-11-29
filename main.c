@@ -535,7 +535,7 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
     requiredMat[3][3] = W.kaca4;
     requiredMat[3][4] = W.pintu4;
     requiredMat[3][5] = W.kayu4;
-
+ printf("Ingin membangun wahana apa?\n");
                 for (int i = 0; i <4; i++){
                     printf("%d.", i +1 );
                     PrintKataW(nameOfRides[i]);
@@ -961,8 +961,13 @@ while (!IsKataSama(input,KataEXIT))
             else if (IsKataSama(command, KataBuy)) {
                 buyy(&tempMoney, Maaterial, HargaaMaterial, &Prep, tempMaterial, &jmlhStack);
             }
-            else if (IsKataSama(command, KataRepair) && prepPhase == false){
-                repairwahana(mapstatus, &wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
+            else if (IsKataSama(command, KataRepair)){
+                if (prepPhase == false){
+                    repairwahana(mapstatus, &wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
+                }
+                else{
+                    printf("***Command ditolak, anda berada di Preparation Phase***\n");
+                }
             }
             else{/*code if moving through gate*/
                 /*map 2 gate movements*/
