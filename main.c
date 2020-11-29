@@ -395,13 +395,13 @@ void office(int mapstatus){
             printf("  1. Nama Wahana : ");
             PrintKataW(nameOfRides[i]);
             printf("\n");
-            printf("  2. Tipe wahana\n");
+            printf("  2. Tipe wahana");
             PrintKataW(TypeWahana[i]);
             printf("\n");
             printf("  3. Harga wahana : ", hargaWahana[i]);
             printf("\n");
             printf("  4. Lokasi wahana : \n");
-            printf("  5. Deskripsi wahana :\n");
+            printf("  5. Deskripsi wahana :");
             PrintKataW(deskripsi[i]);
             printf("\n");
             printf("  6. Kapasitas wahana : %d \n", kapasitasWahana[i]);
@@ -420,6 +420,7 @@ void office(int mapstatus){
         printf("***Anda tidak berada di Map 1***\n");
     }
 }
+
 
 void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
 //1. Setelah meminta command ini, program akan menampilkan wahana dasar yang mungkin dibuat (hasil load file eksternal).
@@ -524,7 +525,6 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
     requiredMat[3][4] = W.pintu4;
     requiredMat[3][5] = W.kayu4;
 
-    
                 for (int i = 0; i <4; i++){
                     printf("%d.", i +1 );
                     PrintKataW(nameOfRides[i]);
@@ -534,25 +534,15 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
                 int X;
                 scanf(" Pilih Wahana : %d\n", &X);
 
-                
-    
-    
-
-    
-
-
     int detikAwal = JamToDetik(*JGlobal);
     *JGlobal = DetikToJam(detikAwal + (3600*waktuBuild[X-1]));
-    TulisJam(*JGlobal);
-    
     
     int i = 0;
 
     boolean check;
-    printf("~ Wahana yang akan dibangun ~\n");
-    printf("Nama Wahana :");
-    PrintKataW(nameOfRides[X-1]);
     printf("\n");
+
+    printf("~ Wahana akan dibangun ~\n");    
     // printf("Nama Wahana : %s\n", nameOfRides[X-1]);
     printf("Biaya untuk membangun : %d\n",  CostWah[X-1]);
     printf("Lama waktu untuk membangun : %d\n", waktuBuild[X-1]);
@@ -616,8 +606,10 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
         printf("Pintu : %d\n", inventorytemp[3]);
         printf("Kayu : %d\n", inventorytemp[4]);
         printf("\n");
-        printf("Sisa Uang anda :\n");
-        printf("%d\n", *tempMoney);}
+        printf("Sisa Uang anda :");
+        printf("%d\n", *tempMoney);
+        printf("\n");}
+        
         else
         {
             printf("error, material kurang\n");
@@ -832,6 +824,7 @@ while (!IsKataSama(input,KataEXIT))
             TulisJam(JGlobal);
             printf("\n");
             printf("Masukkan command: ");
+            printf("\n");
             InputUser(&command);
             int c = rand() % 100;
             if (c >= 0 && c < 5){
