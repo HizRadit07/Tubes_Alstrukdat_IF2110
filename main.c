@@ -20,7 +20,7 @@
 #include "build.h"
 #include "queue.h"
 #include "queue.c"
-#include "wahanaRusak.c"
+//#include "wahanaRusak.c"
 
 typedef struct twahana * address_w;
 typedef struct twahana {
@@ -635,9 +635,9 @@ void build(boolean prepPhase, MATRIKS *M, Jam *JGlobal, int *tempMoney){
     
 }
 
-void mainPhase(Stack *S, Jam *J, boolean *prepPhase){
+void mainPhase(Stack *S, Jam *J, boolean prepPhase){
     infotype X;
-    if (*prepPhase == true){
+    if (prepPhase == true){
         while (!IsEmpty(*S)){
             if(Top(*S) != Nil){
                 Pop(S, &X);
@@ -646,7 +646,7 @@ void mainPhase(Stack *S, Jam *J, boolean *prepPhase){
         Hour(*J) = 7;
         Minute(*J) = 0;
         Second(*J) = 0;
-        *prepPhase = false;
+        prepPhase = false;
         printf("Anda memasuki main phase\n");
         printf("Sekarang jam : ");
         TulisJam(*J);
@@ -740,8 +740,6 @@ D.TabKata[0]='D';D.Length=1;
 Kata d;
 d.TabKata[0]='d';d.Length=1;
 
-
-
 /*inisialisasi jam global*/
 Jam JGlobal=MakeJam(14,50,0);
 Jam JStart=MakeJam(7,0,0);
@@ -785,10 +783,6 @@ printf("\n");
 printf("Masukkan input: ");
 InputUser(&input);
 boolean prepPhase = true;
-boolean wahanarusak1 = false;
-boolean wahanarusak2 = false;
-boolean wahanarusak3 = false;
-boolean wahanarusak4 = false;
 while (!IsKataSama(input,KataEXIT))
 {   
     //opsi 1 untuk main menu//
@@ -821,8 +815,6 @@ while (!IsKataSama(input,KataEXIT))
         int money = 20000;
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
-        /*inisialisasi queue*/
-        Queue Q1,Q2,Q3,Q4;
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
         boolean cekjalan = true;
@@ -832,7 +824,6 @@ while (!IsKataSama(input,KataEXIT))
         posisi=cariPoint(M2,'P');
         /*loop untuk jalan*/
         while (cekjalan){
-            
             printf("Halo ");
             printf(nama);
             printf("Uang anda : $ %d\n", money);
@@ -841,55 +832,28 @@ while (!IsKataSama(input,KataEXIT))
             printf("\n");
             printf("Masukkan command: ");
             InputUser(&command);
-            
             if (Hour(JGlobal) >= 15 || Hour(JGlobal) < 7){
                     prepPhase = true;
-                    printf("\nIni prep phase\n");
+                    printf("Ini prep phase\n");
             }
             if(Hour(JGlobal) < 15 && Hour(JGlobal) >= 7){
                 prepPhase = false;
-                printf("\nIni main phase\n");
+                printf("Ini main phase\n");
             }
-
-            wahanaRusak(&wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
-            if (wahanarusak1 == true){
-                printf("***Wahana di Map 1 rusak***\n");
-            }
-            if (wahanarusak2 == true){
-                printf("***Wahana di Map 2 rusak***\n");
-            }
-            if (wahanarusak3 == true){
-                printf("***Wahana di Map 3 rusak***\n");
-            }
-            if (wahanarusak4 == true){
-                printf("***Wahana di Map 4 rusak***\n");
-            }
-           
-
-
             if (IsKataSama(command,KataEXIT)){
                 cekjalan=false;
             }
-            else if (IsKataSama(command, KataRepair)){
-                repairwahana(mapstatus, &wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
-            }
             else if (IsKataSama(command, KataMAIN)){
-                mainPhase(&Prep, &JGlobal, &prepPhase);
+                mainPhase(&Prep, &JGlobal, prepPhase);
                 
             }
-            
-            /*else if (IsKataSama(command, KataOffice)){
+            /*
+            else if (IsKataSama(command, KataOffice)){
                 office(mapstatus);
-            }*/
+                */
             else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
-                
-                
-                
-
-
-                
                if (mapstatus==1){
                     build(prepPhase, &M1, &JGlobal, &tempMoney);
                 }else if (mapstatus==2){    
@@ -992,7 +956,6 @@ while (!IsKataSama(input,KataEXIT))
                     mapstatus=3;
                 }
                 
-                
                 /*code for moving in the matrix*/
                 if (mapstatus==1){
                 M1=wasd(M1, posisi, command);
@@ -1023,19 +986,6 @@ while (!IsKataSama(input,KataEXIT))
                 JGlobal = DetikToJam(plus);
                 }
             }
-            if (JamToDetik(JGlobal)==3600*7){
-                GenerateQueue(Q1);
-                GenerateQueue(Q2);
-                GenerateQueue(Q3);
-                GenerateQueue(Q4);
-            }
-            if (JamToDetik(JGlobal)%60==0){
-                reduceKesabaran(Q1);
-                reduceKesabaran(Q2);
-                reduceKesabaran(Q3);
-                reduceKesabaran(Q4);
-            }
-            
         }
     }
     else
