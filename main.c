@@ -656,19 +656,6 @@ void mainPhase(Stack *S, Jam *J, boolean prepPhase){
         printf("***Anda sudah berada di Main Phase.***\n");
     }
 }
-void GenerateQueue(Queue Q){
-//generate a queue with random numbers for the amount of times a visitor wants to play//
-    infotypeQ ElQ;
-    int num;
-    CreateEmptyQueue(&Q,5);
-    for (int i = 0; i < 5; i++)
-    {
-        ElQ.Kesabaran=10;
-        num=rand()%5;
-        ElQ.PlayNum=num;
-        AddQueue(&Q,ElQ);
-    }
-}
 void reduceKesabaran(Queue Q){
 //reduce kesabaran of all elmts of q//
 if (!IsEmptyQueue(Q)){
@@ -724,7 +711,9 @@ KataBuild.TabKata[0] = 'b'; KataBuild.TabKata[1] = 'u'; KataBuild.TabKata[2] = '
 Kata KataUpgrade;
 KataUpgrade.TabKata[0] = 'u'; KataUpgrade.TabKata[1] = 'p'; KataUpgrade.TabKata[2] = 'g'; KataUpgrade.TabKata[3] = 'r'; KataUpgrade.TabKata[4] = 'a'; KataUpgrade.TabKata[5] = 'd'; KataUpgrade.TabKata[6] = 'e'; KataUpgrade.Length = 6;
 Kata KataUndo;
-KataUndo.TabKata[0]='u';KataUndo.TabKata[1]='n';KataUndo.TabKata[2]='d';KataUndo.TabKata[3]='0';KataUndo.Length=4;
+KataUndo.TabKata[0]='u';KataUndo.TabKata[1]='n';KataUndo.TabKata[2]='d';KataUndo.TabKata[3]='o';KataUndo.Length=4;
+Kata KataServe;
+KataServe.TabKata[0]='s';KataServe.TabKata[1]='e';KataServe.TabKata[2]='r';KataServe.TabKata[3]='v';KataServe.TabKata[4]='e';KataServe.Length=5;
 Kata KataExecute;
 KataExecute.TabKata[0]='e';KataExecute.TabKata[1]='x';KataExecute.TabKata[2]='e';KataExecute.TabKata[3]='c';KataExecute.TabKata[4]='u';KataExecute.TabKata[5]='t';KataExecute.TabKata[6]='e';KataExecute.Length=7;
 Kata a;
@@ -745,7 +734,7 @@ Kata d;
 d.TabKata[0]='d';d.Length=1;
 
 /*inisialisasi jam global*/
-Jam JGlobal=MakeJam(14,50,0);
+Jam JGlobal=MakeJam(21,0,0);
 Jam JStart=MakeJam(7,0,0);
 Jam JSisa=MakeJam(0,0,0); JSisa = DetikToJam(JamToDetik(JStart) - JamToDetik(JGlobal) + 24*3600);
 /*Variable global buy dan material*/
@@ -820,8 +809,9 @@ while (!IsKataSama(input,KataEXIT))
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
         /*declare queue*/
-        Queue Q1,Q2,Q3,Q4;
-
+        Queue Q1;
+        infotypeQ ElQ1;
+        CreateEmptyQueue(&Q1,5);
         /*inisialisasi semua elemen map*/
         TulisMATRIKS(M2);
         boolean cekjalan = true;
@@ -852,7 +842,12 @@ while (!IsKataSama(input,KataEXIT))
             }
             else if (IsKataSama(command, KataMAIN)){
                 mainPhase(&Prep, &JGlobal, prepPhase);
-                GenerateQueue(Q1);
+                while (!IsFullQueue(Q1))
+                {
+                    ElQ1.Kesabaran=10;
+                    ElQ1.PlayNum=rand() % 5;
+                    AddQueue(&Q1,ElQ1);
+                }
                 prepPhase = false;
             }
             else if (IsKataSama(command,KataPREP)){
@@ -860,8 +855,39 @@ while (!IsKataSama(input,KataEXIT))
                 Minute(JGlobal)=0;
                 Second(JGlobal)=0;
                 prepPhase=true;
-                DelQueueAll(&Q1);
+                if (!IsEmptyQueue(Q1)){
+                    infotypeQ throw;
+                    while (!IsEmptyQueue(Q1))
+                    {
+                        DelQueue(&Q1,&throw);
+                    }
+                }
                 printf("Anda memasuki PrepPhase\n");
+            }
+            else if (IsKataSama(command,KataServe)){
+                if (checkSekitarAntrian(&M1,posisi) && prepPhase==false && !IsEmptyQueue(Q1)){
+                    infotypeQ temp;
+                    DelQueue(&Q1,&temp);
+                    temp.PlayNum=temp.PlayNum-1;
+                    temp.Kesabaran=10;
+                    if (temp.PlayNum>0){
+                        AddQueue(&Q1,temp);
+                    }
+                    money=money+250;
+                    int x=JamToDetik(JGlobal)+30;
+                    JGlobal=DetikToJam(x);
+                }
+                else if (prepPhase==true){
+                    printf("\n");
+                }
+                else if (IsEmptyQueue(Q1)){
+                    printf("Queue Sudah Kosong\n");
+                }
+                else
+                {
+                    printf("Anda tidak dekat antrian\n");
+                }
+                
             }
             /*
             else if (IsKataSama(command, KataOffice)){
