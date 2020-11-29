@@ -388,10 +388,10 @@ void office(int mapstatus, boolean prepPhase){
         penghasilanHari[3] =  ticketPrice[3]*counterHari[3];
 
 
-        
-
+        printf("\n");
+        printf("========= Selamat datang di office =============\n ");
         for (int i = 0; i < 4; i++){
-            printf("Selamat datang di office\n ");
+        
             printf("Detail wahana :");
             printf("  1. Nama Wahana : ");
             PrintKataW(nameOfRides[i]);
@@ -409,12 +409,13 @@ void office(int mapstatus, boolean prepPhase){
             printf("  7. History Upgrade wahana : \n");
             printf("  8. Durasi wahana : %d \n", durasiWahana[i]);
             printf("  9. Ukuran wahana : \n");
-            printf("\n");
+            printf("======================================\n");
             printf("Laporan wahana : ");
             printf("  1. Berapakali wahana dinaiki : %d\n", counterTotal[i]);
             printf("  2. Total penghasilan dari wahana : %d\n", penghasilanTotal[i]);
             printf("  3. Berapa kali wahana dinaiki dalam hari ini : %d\n", counterHari[i]);
             printf("  4. Total penghasilan dari wahana dalam hari ini : %d\n", penghasilanHari[i]);
+            printf("\n");
         }
     }
     else{

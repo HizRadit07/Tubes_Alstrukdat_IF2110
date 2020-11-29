@@ -16,7 +16,8 @@ void detail(POINT posisi){
     //disebelahnya ada wahana
     if(checkSekitar(&Map, posisi)){
 
-    }//lah ngecek disampingnya ada wahana apanya juga gimana wkwkwk
+    }
+    //lah ngecek disampingnya ada wahana apanya juga gimana wkwkwk
     //baca data wahana itu
      //cara baca datanya gimana cuy wkwkwk
 }
