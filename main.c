@@ -306,8 +306,9 @@ void loadWahana(Wahana *W){
 
 }
 
-void office(int mapstatus){
-    if (mapstatus==1){
+void office(int mapstatus, boolean prepPhase){
+    if (prepPhase == false){
+        if (mapstatus==1){
 
         Wahana W;
         WahanaSTART("wahana.txt");
@@ -419,6 +420,11 @@ void office(int mapstatus){
     else{
         printf("***Anda tidak berada di Map 1***\n");
     }
+    }else
+    {
+        printf("Anda berada pada prep phase, perintah tidak bisa dijalankan\n");
+    }
+    
 }
 
 
@@ -800,7 +806,6 @@ while (!IsKataSama(input,KataEXIT))
         char nama[100];
         printf("Masukkan Username : ");
         fgets(nama, 100, stdin);
-        printf(nama);
         int money = 20000;
         int tempMoney = money;
         /*we always start at map2 hence TulisMatriks(M2)*/
@@ -819,6 +824,7 @@ while (!IsKataSama(input,KataEXIT))
         while (cekjalan){
             printf("Halo ");
             printf(nama);
+            printf("!");
             printf("Uang anda : $ %d\n", money);
             printf("Saat ini jam -> ");
             TulisJam(JGlobal);
@@ -845,11 +851,15 @@ while (!IsKataSama(input,KataEXIT))
             }
             if (Hour(JGlobal) >= 15 || Hour(JGlobal) < 7){
                     prepPhase = true;
+                    printf("==============\n");
                     printf("Ini prep phase\n");
+                    printf("==============\n");
             }
             if(Hour(JGlobal) < 15 && Hour(JGlobal) >= 7){
                 prepPhase = false;
+                printf("==============\n");
                 printf("Ini main phase\n");
+                printf("==============\n");
             }
             if (Hour(JGlobal)%2==0 && !IsEmptyQueue(Q1)){
                 for (int i = 1; i <= NBElmtQueue(Q1); i++)
@@ -911,7 +921,7 @@ while (!IsKataSama(input,KataEXIT))
             }
             
             else if (IsKataSama(command, KataOffice)){
-                office(mapstatus);
+                office(mapstatus, prepPhase);
 
             }
             else if(IsKataSama(command,KataBuild)){
