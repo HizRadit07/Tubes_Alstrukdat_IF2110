@@ -306,10 +306,10 @@ void loadWahana(Wahana *W){
 
 }
 
-void office(int *mapstatus, Wahana W){
-    if (*mapstatus==2){
+void office(int mapstatus){
+    if (mapstatus==1){
 
-        
+        Wahana W;
         WahanaSTART("wahana.txt");
         loadWahana(&W);
         
@@ -916,10 +916,11 @@ while (!IsKataSama(input,KataEXIT))
                 }
                 
             }
-            /*
+            
             else if (IsKataSama(command, KataOffice)){
                 office(mapstatus);
-                */
+
+            }
             else if(IsKataSama(command,KataBuild)){
                 //command yg buat build ngapain gitu//
                 //push ke stack gitu//
