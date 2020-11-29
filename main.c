@@ -836,22 +836,24 @@ while (!IsKataSama(input,KataEXIT))
             printf("Masukkan command: ");
             printf("\n");
             InputUser(&command);
-            int c = rand() % 100;
-            if (c >= 0 && c < 5){
-                wahanarusak1 = true;
-                printf("***Wahana di Map 1 rusak***\n");
-            }
-            else if (c >= 5 && c < 10){
-                wahanarusak2 = true;
-                printf("***Wahana di Map 2 rusak***\n");
-            }
-            else if (c >= 10 && c < 15){
-                wahanarusak3 = true;
-                printf("***Wahana di Map 3 rusak***\n");
-            }
-            else if (c >= 15 && c <= 20){
-                wahanarusak4 = true;
-                printf("***Wahana di Map 4 rusak***\n");
+            if (prepPhase == false){
+                int c = rand() % 100;
+                if (c >= 0 && c < 5){
+                    wahanarusak1 = true;
+                    printf("***Wahana di Map 1 rusak***\n");
+                }
+                else if (c >= 5 && c < 10){
+                    wahanarusak2 = true;
+                    printf("***Wahana di Map 2 rusak***\n");
+                }
+                else if (c >= 10 && c < 15){
+                    wahanarusak3 = true;
+                    printf("***Wahana di Map 3 rusak***\n");
+                }
+                else if (c >= 15 && c <= 20){
+                    wahanarusak4 = true;
+                    printf("***Wahana di Map 4 rusak***\n");
+                }
             }
             if (Hour(JGlobal) >= 15 || Hour(JGlobal) < 7){
                     prepPhase = true;
@@ -959,7 +961,7 @@ while (!IsKataSama(input,KataEXIT))
             else if (IsKataSama(command, KataBuy)) {
                 buyy(&tempMoney, Maaterial, HargaaMaterial, &Prep, tempMaterial, &jmlhStack);
             }
-            else if (IsKataSama(command, KataRepair)){
+            else if (IsKataSama(command, KataRepair) && prepPhase == false){
                 repairwahana(mapstatus, &wahanarusak1, &wahanarusak2, &wahanarusak3, &wahanarusak4);
             }
             else{/*code if moving through gate*/
