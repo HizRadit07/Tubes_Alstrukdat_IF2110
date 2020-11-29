@@ -368,7 +368,11 @@ void office(int mapstatus, boolean prepPhase){
         counterHari[2] = 1;
         counterHari[3] = 1;
 
-        int counterTotal[4]; //diisi dari data hasilserve 
+        int counterTotal[4]; //diisi dari data hasilserve
+        counterTotal[0] = 0;
+        counterTotal[1] = 0; 
+        counterTotal[2] = 0;
+        counterTotal[3] = 0; 
         counterTotal[0] += counterHari[0];
         counterTotal[1] += counterHari[1];
         counterTotal[2] += counterHari[2];
@@ -392,14 +396,14 @@ void office(int mapstatus, boolean prepPhase){
         printf("========= Selamat datang di office =============\n ");
         for (int i = 0; i < 4; i++){
         
-            printf("Detail wahana :");
+            printf("Detail wahana :\n");
             printf("  1. Nama Wahana : ");
             PrintKataW(nameOfRides[i]);
             printf("\n");
-            printf("  2. Tipe wahana");
+            printf("  2. Tipe wahana : ");
             PrintKataW(TypeWahana[i]);
             printf("\n");
-            printf("  3. Harga wahana : ", hargaWahana[i]);
+            printf("  3. Harga wahana : %d", hargaWahana[i]);
             printf("\n");
             printf("  4. Lokasi wahana : \n");
             printf("  5. Deskripsi wahana :");
@@ -408,9 +412,9 @@ void office(int mapstatus, boolean prepPhase){
             printf("  6. Kapasitas wahana : %d \n", kapasitasWahana[i]);
             printf("  7. History Upgrade wahana : \n");
             printf("  8. Durasi wahana : %d \n", durasiWahana[i]);
-            printf("  9. Ukuran wahana : \n");
+            printf("  9. Ukuran wahana : 1x1\n");
             printf("======================================\n");
-            printf("Laporan wahana : ");
+            printf("Laporan wahana : \n");
             printf("  1. Berapakali wahana dinaiki : %d\n", counterTotal[i]);
             printf("  2. Total penghasilan dari wahana : %d\n", penghasilanTotal[i]);
             printf("  3. Berapa kali wahana dinaiki dalam hari ini : %d\n", counterHari[i]);
