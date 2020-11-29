@@ -837,6 +837,12 @@ while (!IsKataSama(input,KataEXIT))
                 prepPhase = false;
                 printf("Ini main phase\n");
             }
+            if (Hour(JGlobal)%2==0 && !IsEmptyQueue(Q1)){
+                for (int i = 1; i <= NBElmtQueue(Q1); i++)
+                {
+                    Q1.T[i].Kesabaran=Q1.T[i].Kesabaran-1;
+                }
+            }
             if (IsKataSama(command,KataEXIT)){
                 cekjalan=false;
             }
