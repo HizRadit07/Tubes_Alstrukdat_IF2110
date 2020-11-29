@@ -824,7 +824,6 @@ while (!IsKataSama(input,KataEXIT))
         while (cekjalan){
             printf("Halo ");
             printf(nama);
-            printf("!");
             printf("Uang anda : $ %d\n", money);
             printf("Saat ini jam -> ");
             TulisJam(JGlobal);
